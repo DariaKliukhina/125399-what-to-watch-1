@@ -9,7 +9,7 @@ it(`Show-more button click correctly works`, () => {
   const clickHandler = jest.fn();
   const filmsList = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
   const welcomeScreen = shallow(<MainScreen
-    filmsList={filmsList}
+    filmsList = {filmsList}
     onClick = {clickHandler}
   />);
 
