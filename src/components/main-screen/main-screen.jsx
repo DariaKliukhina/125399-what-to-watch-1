@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MainScreen = (props) => {
-  const {filmsList} = props;
+  const {filmsList, onClick} = props;
   return <React.Fragment>
     <div className="visually-hidden">
       <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -162,7 +162,7 @@ const MainScreen = (props) => {
         </div>
 
         <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
+          <button className="catalog__button" type="button" onClick={onClick}>Show more</button>
         </div>
       </section>
 
@@ -185,6 +185,7 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   filmsList: PropTypes.array,
+  onClick: PropTypes.func
 };
 
 export default MainScreen;
