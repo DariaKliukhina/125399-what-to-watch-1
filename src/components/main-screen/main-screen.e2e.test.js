@@ -2,14 +2,16 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MainScreen from './main-screen.jsx';
+import films from "../../mocks/films";
+import genres from "../../mocks/genres";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`Show-more button click correctly works`, () => {
+it(`Simulating button click`, () => {
   const clickHandler = jest.fn();
-  const filmsList = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
   const welcomeScreen = shallow(<MainScreen
-    filmsList = {filmsList}
+    films={films}
+    genres={genres}
     onClick = {clickHandler}
   />);
 

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenreList screen renders correctly 1`] = `
+<li
+  className="catalog__genres-item"
+>
+  <a
+    className="catalog__genres-link"
+    href="#"
+  >
+    Comedies
+  </a>
+</li>
+`;
