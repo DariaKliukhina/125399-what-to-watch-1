@@ -1,5 +1,5 @@
 import React from "react";
-import {configure, mount} from "enzyme";
+import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import MovieCard from './movie-card.jsx';
@@ -10,43 +10,35 @@ const mock = {
   film: {
     title: `Macbeth`,
     picture: `picture.jpg`,
+    preview: `video.mp4`
   }
 };
 
-it(`MovieCard clicks works correctly`, () => {
-  const {film} = mock;
-  const clickHandler = jest.fn();
-  const filmCard = mount(<MovieCard
-    onClick={clickHandler}
-    onHover={clickHandler}
-    film={film}
-  />);
+it(`Film title correctly triggered click event `, () => {
+  const onTitleClick = jest.fn();
+  const props = {
+    film: mock.film,
+    onTitleClick,
+  };
 
-  const button = filmCard.find(`button`);
-  const link = filmCard.find(`a`);
+  const card = shallow(<MovieCard {...props}/>);
 
-  button.simulate(`click`, {
-    preventDefault: clickHandler,
-  });
+  const title = card.find(`.small-movie-card__link`);
+  title.simulate(`click`, {preventDefault() {}});
 
-  link.simulate(`click`, {
-    preventDefault: clickHandler,
-  });
-
-  expect(clickHandler).toHaveBeenCalledTimes(2);
+  expect(onTitleClick).toHaveBeenCalledTimes(1);
 });
 
-it(`MovieCard resends correctly item`, () => {
-  const {film} = mock;
-  const clickHandler = jest.fn();
-  const item = mount(<MovieCard
-    onClick={clickHandler}
-    onHover={clickHandler}
-    film={film}
-  />);
+it(`On mouse enter on film card correctly triggered mouse enter handler`, () => {
+  const onMouseEnter = jest.fn();
+  const props = {
+    film: mock.film,
+  };
 
-  const playButton = item.find(`.small-movie-card__play-btn`);
-  playButton.simulate(`click`);
+  MovieCard.prototype._mouseEnterHandler = onMouseEnter;
 
-  expect(clickHandler).toHaveBeenCalledWith(film);
+  const card = shallow(<MovieCard {...props}/>);
+
+  card.simulate(`mouseEnter`, {preventDefault() {}});
+  expect(onMouseEnter).toHaveBeenCalledTimes(1);
 });
