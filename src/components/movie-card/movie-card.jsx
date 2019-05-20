@@ -1,30 +1,75 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-const MovieCard = ({film, onClick, onHover}) => {
-  const {
-    title,
-    picture
-  } = film;
+import VideoPlayer from '../video-player/video-player.jsx';
 
-  return <article className="small-movie-card catalog__movies-card" onMouseEnter={() => onHover(film)}>
-    <button className="small-movie-card__play-btn" type="button" onClick={() => onClick(film)}>Play</button>
-    <div className="small-movie-card__image">
-      <img src={`img/` + picture.toLowerCase()}
-        alt={title} width="280" height="175"/>
-    </div>
-    <h3 className="small-movie-card__title">
-      <a className="small-movie-card__link" href="movie-page.html" onClick={() => onClick(film)}>{title}</a>
-    </h3>
-  </article>;
+const SIZES = {
+  width: 280,
+  height: 175
 };
+
+class MovieCard extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      timerId: null,
+      isPreviewPlaying: false,
+    };
+
+
+    this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
+    this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
+  }
+
+  render() {
+    const {film, onTitleClick} = this.props;
+    const {title, picture, preview} = film;
+    const {isPreviewPlaying} = this.state;
+    const {width, height} = SIZES;
+
+    return (<article
+      ref={this._filmCardRef}
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={this._mouseEnterHandler}
+      onMouseLeave={this._mouseLeaveHandler}>
+      <div className="small-movie-card__image">
+        <VideoPlayer
+          videoSrc={preview}
+          posterSrc={`img/` + picture.toLowerCase()}
+          options={
+            {
+              width,
+              height,
+            }
+          }
+          isPlaying={isPreviewPlaying}
+        />
+      </div>
+      <h3 className="small-movie-card__title">
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onTitleClick}>{title}</a>
+      </h3>
+    </article>);
+  }
+
+  _mouseEnterHandler() {
+    this._timer = setTimeout(() => {
+      this.setState({isPreviewPlaying: true});
+    }, 1000);
+  }
+
+  _mouseLeaveHandler() {
+    clearTimeout(this._timer);
+    this.setState({isPreviewPlaying: false});
+  }
+}
 
 MovieCard.propTypes = {
   film: PropTypes.shape({
     title: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
   }).isRequired,
-  onClick: PropTypes.func,
+  onTitleClick: PropTypes.func,
   onHover: PropTypes.func,
 };
 

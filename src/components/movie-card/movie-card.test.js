@@ -6,6 +6,7 @@ const mock = {
   film: {
     title: `Macbeth`,
     picture: `picture.jpg`,
+    preview: `video.mp4`
   }
 };
 
