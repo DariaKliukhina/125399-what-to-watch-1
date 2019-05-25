@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 import MovieCard from '../movie-card/movie-card.jsx';
 
-const FilmsList = ({films}) => {
+const FilmsList = ({films, onGenreClick}) => {
   const itemList = films.map((item) => {
     return <MovieCard
       film={item}
       key={item.picture}
+      onGenreClick = {onGenreClick}
     />;
   });
 
@@ -20,7 +21,8 @@ FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
-  })).isRequired
+  })).isRequired,
+  onGenreClick: PropTypes.func,
 };
 
 export default FilmsList;

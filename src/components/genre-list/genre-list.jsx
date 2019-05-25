@@ -1,29 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import genres from "../../mocks/genres.js";
 
 const GenreList = (props) => {
-  const {genre} = props;
+  const {activeGenre, onGenreClick} = props;
 
   return (
-    <li className="catalog__genres-item">
-      <a href="#" className="catalog__genres-link">
-        {genre}
-      </a>
-    </li>
+    <ul className="catalog__genres-list">
+      {genres.map((genre, index) => (
+        <li
+          key={index}
+          className={`catalog__genres-item ${
+            genre === activeGenre ? `catalog__genres-item--active` : ``
+          }`}
+        >
+          <a
+            href="#"
+            onClick={(evt) => {
+              evt.preventDefault();
+              onGenreClick(genre);
+            }}
+            className="catalog__genres-link"
+          >
+            {genre}
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 };
 
 GenreList.propTypes = {
-  genre: PropTypes.oneOf([
-    `Comedies`,
-    `Crime`,
-    `Documentary`,
-    `Dramas`,
-    `Horror`,
-    `Kids & Family`,
-    `Romance`,
-    `Sci-Fi`,
-    `Thrillers`]).isRequired
+  activeGenre: PropTypes.string.isRequired,
+  onGenreClick: PropTypes.func.isRequired
 };
 
 export default GenreList;
