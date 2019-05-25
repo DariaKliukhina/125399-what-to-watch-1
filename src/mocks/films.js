@@ -28,7 +28,13 @@ const films = [
     title: `We need to talk about Kevin`,
     picture: `we-need-to-talk-about-kevin.jpg`,
     preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-  }
+  },
+  {
+    genre: [`Crime`],
+    title: `What We Do in the Shadows`,
+    picture: `what-we-do-in-the-shadows.jpg`,
+    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+  },
 ];
 
 export default films;

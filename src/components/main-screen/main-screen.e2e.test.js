@@ -10,9 +10,10 @@ Enzyme.configure({adapter: new Adapter()});
 it(`Simulating button click`, () => {
   const clickHandler = jest.fn();
   const welcomeScreen = shallow(<MainScreen
-    films={films}
     genres={genres}
-    onClick = {clickHandler}
+    films={films}
+    activeGenre={genres[0]}
+    onGenreClick={clickHandler}
   />);
 
   const startButton = welcomeScreen.find(`.catalog__button`);

@@ -7,9 +7,10 @@ import genres from '../../mocks/genres';
 it(`MainScreen correctly renders after relaunch`, () => {
   const tree = renderer
     .create(<MainScreen
-      films={films}
       genres={genres}
-      onClick={jest.fn()}
+      films={films}
+      activeGenre={genres[0]}
+      onGenreClick={jest.fn()}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();
