@@ -5,13 +5,13 @@ const initialState = {
   films,
 };
 
-const actionChangeGenre = (newGenre = `All types`) => ({
+const actionChangeGenre = (newGenre = `All genres`) => ({
   type: `CHANGE_GENRE`,
   payload: newGenre
 });
 
-const actionChangeFilms = (newGenre = `All types`) => {
-  if (newGenre === `All types`) {
+const actionChangeFilms = (newGenre = `All genres`) => {
+  if (newGenre === `All genres`) {
     return {
       type: `SHOW_ALL`
     };
