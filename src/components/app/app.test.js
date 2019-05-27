@@ -1,17 +1,29 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app';
 import films from '../../mocks/films.js';
 import genres from "../../mocks/genres";
+import {App} from './app.jsx';
 
-it(`App renders correctly`, () => {
-  const tree = renderer
-    .create(<App
-      films={films}
-      genres={genres}
-      onClick={jest.fn()}
-    />)
-    .toJSON();
+const activeGenre = `All genres`;
 
-  expect(tree).toMatchSnapshot();
+describe(`App:`, () => {
+  it(`Correctly renders after relaunch`, () => {
+    const tree = renderer
+      .create(
+          <App
+            films={films}
+            genres={genres}
+            activeGenre={activeGenre}
+            onGenreClick={jest.fn()}
+          />,
+          {
+            createNodeMock: () => {
+              return {};
+            }
+          }
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -8,6 +8,7 @@ configure({adapter: new Adapter()});
 
 const mock = {
   film: {
+    genre: [`Dramas`],
     title: `Macbeth`,
     picture: `picture.jpg`,
     preview: `video.mp4`
@@ -15,10 +16,10 @@ const mock = {
 };
 
 it(`Film title correctly triggered click event `, () => {
-  const onTitleClick = jest.fn();
+  const onGenreClick = jest.fn();
   const props = {
     film: mock.film,
-    onTitleClick,
+    onGenreClick,
   };
 
   const card = shallow(<MovieCard {...props}/>);
@@ -26,7 +27,7 @@ it(`Film title correctly triggered click event `, () => {
   const title = card.find(`.small-movie-card__link`);
   title.simulate(`click`, {preventDefault() {}});
 
-  expect(onTitleClick).toHaveBeenCalledTimes(1);
+  expect(onGenreClick).toHaveBeenCalledTimes(1);
 });
 
 it(`On mouse enter on film card correctly triggered mouse enter handler`, () => {

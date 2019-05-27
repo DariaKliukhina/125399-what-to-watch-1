@@ -23,7 +23,7 @@ class MovieCard extends PureComponent {
   }
 
   render() {
-    const {film, onTitleClick} = this.props;
+    const {film, onGenreClick} = this.props;
     const {title, picture, preview} = film;
     const {isPreviewPlaying} = this.state;
     const {width, height} = SIZES;
@@ -47,7 +47,7 @@ class MovieCard extends PureComponent {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onTitleClick}>{title}</a>
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onGenreClick}>{title}</a>
       </h3>
     </article>);
   }
@@ -69,7 +69,7 @@ MovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
   }).isRequired,
-  onTitleClick: PropTypes.func,
+  onGenreClick: PropTypes.func,
   onHover: PropTypes.func,
 };
 
