@@ -141,7 +141,7 @@ class MainScreen extends PureComponent {
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <GenreList activeGenre={activeGenre} onGenreClick={onGenreClick} />
+            <GenreList activeItem={activeGenre} onGenreClick={onGenreClick} />
 
             <FilmsList
               films={films}

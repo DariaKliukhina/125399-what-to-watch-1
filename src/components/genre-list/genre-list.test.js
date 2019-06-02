@@ -11,7 +11,7 @@ it(`GenreList screen renders correctly`, () => {
 
   const component = renderer.create(
       <GenreList
-        activeGenre={mocks.genre}
+        activeItem={mocks.genre}
         onGenreClick={mocks.functionHandler}
       />
   ).toJSON();
