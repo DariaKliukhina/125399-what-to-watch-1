@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import withActiveItem from "../hocs/withActiveItem/withActiveItem.jsx";
 import MovieCard from '../movie-card/movie-card.jsx';
 
 const FilmsList = ({films, onGenreClick}) => {
@@ -25,4 +25,4 @@ FilmsList.propTypes = {
   onGenreClick: PropTypes.func,
 };
 
-export default FilmsList;
+export default withActiveItem(FilmsList);

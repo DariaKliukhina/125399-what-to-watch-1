@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-
+import withVideo from "../hocs/withVideo/withVideo.jsx";
 import VideoPlayer from '../video-player/video-player.jsx';
 
 const SIZES = {
@@ -73,4 +73,4 @@ MovieCard.propTypes = {
   onHover: PropTypes.func,
 };
 
-export default MovieCard;
+export default withVideo(MovieCard);

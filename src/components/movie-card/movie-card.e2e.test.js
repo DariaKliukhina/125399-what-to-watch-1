@@ -1,5 +1,5 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import MovieCard from './movie-card.jsx';
@@ -22,24 +22,28 @@ it(`Film title correctly triggered click event `, () => {
     onGenreClick,
   };
 
-  const card = shallow(<MovieCard {...props}/>);
+  const movieCard = mount(<MovieCard {...props}/>);
 
-  const title = card.find(`.small-movie-card__link`);
-  title.simulate(`click`, {preventDefault() {}});
+  const titleLink = movieCard.find(`.small-movie-card__link`);
+
+  titleLink.simulate(`click`, {preventDefault() {}});
 
   expect(onGenreClick).toHaveBeenCalledTimes(1);
 });
 
 it(`On mouse enter on film card correctly triggered mouse enter handler`, () => {
-  const onMouseEnter = jest.fn();
+  const onGenreClick = jest.fn();
   const props = {
     film: mock.film,
+    onGenreClick,
   };
+  jest.useFakeTimers();
 
-  MovieCard.prototype._mouseEnterHandler = onMouseEnter;
+  const movieCard = mount(<MovieCard {...props}/>);
 
-  const card = shallow(<MovieCard {...props}/>);
+  const link = movieCard.find(`.small-movie-card__link`);
 
-  card.simulate(`mouseEnter`, {preventDefault() {}});
-  expect(onMouseEnter).toHaveBeenCalledTimes(1);
+  link.simulate(`click`);
+
+  expect(onGenreClick).toHaveBeenCalledTimes(1);
 });
