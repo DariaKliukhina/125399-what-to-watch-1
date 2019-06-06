@@ -5,13 +5,26 @@ import GenreList from './genre-list.jsx';
 
 it(`GenreList screen renders correctly`, () => {
   const mocks = {
-    genre: `All genres`,
+    genres: [
+      `All genres`,
+      `Comedies`,
+      `Crime`,
+      `Documentary`,
+      `Dramas`,
+      `Horror`,
+      `Kids & Family`,
+      `Romance`,
+      `Sci-Fi`,
+      `Thrillers`
+    ],
+    activeGenre: `All genres`,
     functionHandler: jest.fn()
   };
 
   const component = renderer.create(
       <GenreList
-        activeItem={mocks.genre}
+        genres={mocks.genres}
+        activeItem={mocks.activeGenre}
         onGenreClick={mocks.functionHandler}
       />
   ).toJSON();

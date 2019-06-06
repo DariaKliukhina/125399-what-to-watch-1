@@ -24,7 +24,7 @@ class MovieCard extends PureComponent {
 
   render() {
     const {film, onGenreClick} = this.props;
-    const {title, picture, preview} = film;
+    const {name, preview, poster} = film;
     const {isPreviewPlaying} = this.state;
     const {width, height} = SIZES;
 
@@ -35,19 +35,20 @@ class MovieCard extends PureComponent {
       onMouseLeave={this._mouseLeaveHandler}>
       <div className="small-movie-card__image">
         <VideoPlayer
-          videoSrc={preview}
-          posterSrc={`img/` + picture.toLowerCase()}
           options={
             {
               width,
               height,
             }
           }
+          videoSrc={preview}
+          posterSrc={poster}
+          muted={true}
           isPlaying={isPreviewPlaying}
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onGenreClick}>{title}</a>
+        <a className="small-movie-card__link" href="movie-page.html" onClick={onGenreClick}>{name}</a>
       </h3>
     </article>);
   }
@@ -66,8 +67,10 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   film: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   }).isRequired,
   onGenreClick: PropTypes.func,
   onHover: PropTypes.func,
