@@ -4,9 +4,9 @@ import MovieCard from './movie-card.jsx';
 
 const mock = {
   film: {
-    genre: [`Dramas`],
-    title: `Macbeth`,
-    picture: `picture.jpg`,
+    genre: `Dramas`,
+    name: `Macbeth`,
+    poster: `picture.jpg`,
     preview: `video.mp4`
   }
 };

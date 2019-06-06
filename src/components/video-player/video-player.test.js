@@ -5,10 +5,11 @@ import VideoPlayer from './video-player.jsx';
 
 const mock = {
   film: {
-    title: `Bohemian Rhapsody`,
-    picture: `poster.jpg`,
-    preview: `video.mp4`,
-  },
+    genre: [`Dramas`],
+    name: `Macbeth`,
+    poster: `picture.jpg`,
+    preview: `video.mp4`
+  }
 };
 
 it(`Video player correctly renders`, () => {

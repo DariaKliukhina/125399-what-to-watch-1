@@ -398,7 +398,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              poster="fantastic-beasts-the-crimes-of-grindelwald.jpg"
               src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
               width={280}
             />
@@ -427,7 +427,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="img/bohemian-rhapsody.jpg"
+              poster="bohemian-rhapsody.jpg"
               src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
               width={280}
             />
@@ -456,7 +456,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="img/macbeth.jpg"
+              poster="macbeth.jpg"
               src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
               width={280}
             />
@@ -485,7 +485,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="img/aviator.jpg"
+              poster="aviator.jpg"
               src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
               width={280}
             />
@@ -514,7 +514,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="img/we-need-to-talk-about-kevin.jpg"
+              poster="we-need-to-talk-about-kevin.jpg"
               src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
               width={280}
             />
@@ -543,7 +543,7 @@ Array [
               height={175}
               loop={true}
               muted={true}
-              poster="img/what-we-do-in-the-shadows.jpg"
+              poster="what-we-do-in-the-shadows.jpg"
               src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
               width={280}
             />

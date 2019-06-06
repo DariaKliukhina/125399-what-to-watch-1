@@ -4,10 +4,10 @@ import withActiveItem from "../hocs/withActiveItem/withActiveItem.jsx";
 import MovieCard from '../movie-card/movie-card.jsx';
 
 const FilmsList = ({films, onGenreClick}) => {
-  const itemList = films.map((item) => {
+  const itemList = films.map((item, index) => {
     return <MovieCard
       film={item}
-      key={item.picture}
+      key={index}
       onGenreClick = {onGenreClick}
     />;
   });
@@ -19,8 +19,10 @@ const FilmsList = ({films, onGenreClick}) => {
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   })).isRequired,
   onGenreClick: PropTypes.func,
 };

@@ -1,22 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app.jsx';
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer";
+import thunk from "redux-thunk";
+import {compose} from "recompose";
 
-import genres from './mocks/genres';
+import reducer from "./reducer/index.js";
+import {Operation} from "./reducer/data/data";
+import {createAPI} from "./api";
+
+import App from './components/app/app.jsx';
 
 const init = () => {
+  const api = createAPI((...args) => store.dispatch(...args));
   const store = createStore(
       reducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      compose(
+          applyMiddleware(thunk.withExtraArgument(api)),
+          window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
   );
+
+  store.dispatch(Operation.loadFilms());
 
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          genres={genres}/>
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

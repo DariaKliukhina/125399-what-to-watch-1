@@ -13,7 +13,7 @@ exports[`MovieCard renders correctly 1`] = `
       height={175}
       loop={true}
       muted={true}
-      poster="img/picture.jpg"
+      poster="picture.jpg"
       src="video.mp4"
       width={280}
     />
