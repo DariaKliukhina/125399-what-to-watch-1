@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import GenreList from "../genre-list/genre-list.jsx";
 import FilmsList from "../films-list/films-list.jsx";
@@ -15,7 +16,6 @@ class MainScreen extends PureComponent {
     };
 
     this._handleClick = this._handleClick.bind(this);
-    this._handelSignInClick = this._handelSignInClick.bind(this);
     this._formUserBlock = this._formUserBlock.bind(this);
   }
 
@@ -25,25 +25,14 @@ class MainScreen extends PureComponent {
     });
   }
 
-  _handelSignInClick(evt) {
-    const {showLogIn} = this.props;
-
-    evt.preventDefault();
-    showLogIn(`login`);
-  }
-
   _formUserBlock() {
     const {authorized, userAvatar, userName} = this.props;
     if (!authorized) {
       return (
         <div className="user-block">
-          <a
-            href="sign-in.html"
-            className="user-block__link"
-            onClick={this._handelSignInClick}
-          >
+          <Link to="/login" className="user-block__link">
             Sign in
-          </a>
+          </Link>
         </div>
       );
     } else {
@@ -213,7 +202,6 @@ MainScreen.propTypes = {
   authorized: PropTypes.bool.isRequired,
   userAvatar: PropTypes.string,
   userName: PropTypes.string,
-  showLogIn: PropTypes.func.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,

@@ -1,7 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
 import {
-  actionChangeAuthorizationRequestStatus,
   actionChangeAuthorizationProcessStatus,
   actionChangeAuthorizationStatus,
   actionSetUserInfo,
@@ -30,20 +29,6 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for changing authorization status return correct payload`, () => {
     expect(actionChangeAuthorizationStatus(true)).toEqual({
       type: ActionType.CHANGE_AUTHORIZATION_STATUS,
-      payload: true
-    });
-  });
-
-  it(`Action creator for changing authorization request status return correct action`, () => {
-    expect(actionChangeAuthorizationRequestStatus(false)).toEqual({
-      type: ActionType.CHANGE_AUTHORIZATION_REQUEST_STATUS,
-      payload: false
-    });
-  });
-
-  it(`Action creator for changing authorization request status return correct payload`, () => {
-    expect(actionChangeAuthorizationRequestStatus(true)).toEqual({
-      type: ActionType.CHANGE_AUTHORIZATION_REQUEST_STATUS,
       payload: true
     });
   });
@@ -80,7 +65,6 @@ describe(`Action creators work correctly`, () => {
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
-      isAuthorizationRequired: false,
       authorizationFailed: false,
       authorized: false,
       currentUser: {
@@ -96,7 +80,6 @@ describe(`Reducer works correctly`, () => {
     expect(
         reducer(
             {
-              isAuthorizationRequired: false,
               authorizationFailed: false,
               authorized: false,
               currentUser: {
@@ -112,41 +95,8 @@ describe(`Reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      isAuthorizationRequired: false,
       authorizationFailed: false,
       authorized: true,
-      currentUser: {
-        userId: 1,
-        userEmail: ``,
-        userName: ``,
-        userAvatar: ``
-      }
-    });
-  });
-
-  it(`Reducer should change isAuthorizationRequired to given value`, () => {
-    expect(
-        reducer(
-            {
-              isAuthorizationRequired: false,
-              authorizationFailed: false,
-              authorized: false,
-              currentUser: {
-                userId: 1,
-                userEmail: ``,
-                userName: ``,
-                userAvatar: ``
-              }
-            },
-            {
-              type: ActionType.CHANGE_AUTHORIZATION_REQUEST_STATUS,
-              payload: true
-            }
-        )
-    ).toEqual({
-      isAuthorizationRequired: true,
-      authorizationFailed: false,
-      authorized: false,
       currentUser: {
         userId: 1,
         userEmail: ``,
@@ -160,7 +110,6 @@ describe(`Reducer works correctly`, () => {
     expect(
         reducer(
             {
-              isAuthorizationRequired: false,
               authorizationFailed: false,
               authorized: false,
               currentUser: {
@@ -176,7 +125,6 @@ describe(`Reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      isAuthorizationRequired: false,
       authorizationFailed: true,
       authorized: false,
       currentUser: {

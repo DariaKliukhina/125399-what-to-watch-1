@@ -1,5 +1,4 @@
 const initialState = {
-  isAuthorizationRequired: false,
   authorizationFailed: false,
   authorized: false,
   currentUser: {
@@ -22,11 +21,6 @@ const actionChangeAuthorizationStatus = (status) => ({
   payload: status
 });
 
-const actionChangeAuthorizationRequestStatus = (status) => ({
-  type: ActionType.CHANGE_AUTHORIZATION_REQUEST_STATUS,
-  payload: status
-});
-
 const actionChangeAuthorizationProcessStatus = (status) => ({
   type: ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS,
   payload: status
@@ -43,8 +37,8 @@ const Operation = {
       .post(`/login`, loginInfo)
       .then((response) => {
         dispatch(actionSetUserInfo(response.data));
-        dispatch(actionChangeAuthorizationRequestStatus(false));
         dispatch(actionChangeAuthorizationStatus(true));
+        history.push(`/`);
       })
       .catch(() => {
         dispatch(actionChangeAuthorizationProcessStatus(true));
@@ -57,16 +51,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_AUTHORIZATION_STATUS:
       return Object.assign({}, state, {
         authorized: action.payload
-      });
-
-    case ActionType.CHANGE_AUTHORIZATION_REQUEST_STATUS:
-      return Object.assign({}, state, {
-        isAuthorizationRequired: action.payload
-      });
-
-    case ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS:
-      return Object.assign({}, state, {
-        authorizationFailed: action.payload
       });
 
     case ActionType.SET_USER_INFO:
@@ -87,7 +71,6 @@ export {
   reducer,
   ActionType,
   Operation,
-  actionChangeAuthorizationRequestStatus,
   actionChangeAuthorizationProcessStatus,
   actionChangeAuthorizationStatus,
   actionSetUserInfo
