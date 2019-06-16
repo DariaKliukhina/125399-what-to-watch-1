@@ -59,10 +59,15 @@ const mocks = {
 it(`MainScreen correctly renders after relaunch`, () => {
   const tree = renderer
     .create(<MainScreen
+      authorized={false}
+      changeScreen={mocks.functionHandler}
+      userAvatar={`ava`}
+      userName={`name`}
       genres={mocks.genres}
       films={mocks.films}
       activeGenre={mocks.activeGenre}
       onGenreClick={jest.fn()}
+      showLogIn={mocks.functionHandler}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

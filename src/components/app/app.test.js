@@ -54,6 +54,12 @@ const mocks = {
     `Thrillers`
   ],
   activeGenre: `All genres`,
+  currentUser: {
+    userId: 1,
+    userEmail: `ema@ema.ru`,
+    userName: `name`,
+    userAvatar: `ava`
+  },
 };
 
 describe(`App:`, () => {
@@ -61,10 +67,14 @@ describe(`App:`, () => {
     const tree = renderer
       .create(
           <App
+            authorized={false}
+            authorizationRequired={false}
             films={mocks.films}
             genres={mocks.genres}
             activeGenre={mocks.activeGenre}
             onGenreClick={jest.fn()}
+            currentUser={mocks.currentUser}
+            showLogIn={mocks.functionHandler}
           />,
           {
             createNodeMock: () => {
