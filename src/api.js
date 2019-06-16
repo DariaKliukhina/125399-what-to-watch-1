@@ -10,7 +10,13 @@ export const createAPI = () => {
   });
 
   const onSuccess = (response) => response;
-  const onFail = (err) => err;
+  const onFail = (err) => {
+    if (err.status === 400) {
+      return;
+    }
+
+    throw err;
+  };
 
   api.interceptors.response.use(onSuccess, onFail);
 
