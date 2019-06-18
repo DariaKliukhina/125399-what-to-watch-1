@@ -11,7 +11,6 @@ const initialState = {
 
 const ActionType = {
   CHANGE_AUTHORIZATION_STATUS: `CHANGE_AUTHORIZATION_STATUS`,
-  CHANGE_AUTHORIZATION_REQUEST_STATUS: `CHANGE_AUTHORIZATION_REQUEST_STATUS`,
   CHANGE_AUTHORIZATION_PROCESS_STATUS: `CHANGE_AUTHORIZATION_PROCESS_STATUS`,
   SET_USER_INFO: `SET_USER_INFO`
 };
@@ -53,6 +52,11 @@ const reducer = (state = initialState, action) => {
         authorized: action.payload
       });
 
+
+    case ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS:
+      return Object.assign({}, state, {
+        authorizationFailed: action.payload
+      });
     case ActionType.SET_USER_INFO:
       return Object.assign({}, state, {
         currentUser: {
