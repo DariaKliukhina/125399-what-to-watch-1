@@ -31,7 +31,7 @@ const App = (props) => {
   return (
     <Switch>
       <Route path="/" exact render={() => <MainScreen {...data} />} />
-      <Route path="/login" render={() => <SignIn />} />
+      <Route path="/login" render={() => <SignIn/>} />
       <Route path="/favorites" render={() => <Favorites authorized={authorized} />}
       />
     </Switch>

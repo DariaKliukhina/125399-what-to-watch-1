@@ -31,7 +31,7 @@ const actionSetUserInfo = (currentUser) => ({
 });
 
 const Operation = {
-  authorizeUser: (loginInfo) => (dispatch, _getState, api) => {
+  authorizeUser: (loginInfo, history) => (dispatch, _getState, api) => {
     return api
       .post(`/login`, loginInfo)
       .then((response) => {

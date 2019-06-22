@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {Operation} from "../../reducer/user/user";
 import withErrors from "../hocs/withErrors/withErrors.jsx";
+import history from "../../history";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -220,7 +221,7 @@ class SignIn extends PureComponent {
         email: this._emailRef.current.value,
         password: this._passwordRef.current.value
       };
-      changeAuthorizationStatus(userInfo);
+      changeAuthorizationStatus(userInfo, history);
     }
   }
 
@@ -263,8 +264,8 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeAuthorizationStatus: (user) => {
-    dispatch(Operation.authorizeUser(user));
+  changeAuthorizationStatus: (user, windowHistory) => {
+    dispatch(Operation.authorizeUser(user, windowHistory));
   }
 });
 
