@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import MainScreen from './main-screen';
+import {BrowserRouter} from "react-router-dom";
 
 const mocks = {
   films: [
@@ -58,17 +59,18 @@ const mocks = {
 
 it(`MainScreen correctly renders after relaunch`, () => {
   const tree = renderer
-    .create(<MainScreen
-      authorized={false}
-      changeScreen={mocks.functionHandler}
-      userAvatar={`ava`}
-      userName={`name`}
-      genres={mocks.genres}
-      films={mocks.films}
-      activeGenre={mocks.activeGenre}
-      onGenreClick={jest.fn()}
-      showLogIn={mocks.functionHandler}
-    />)
+    .create(
+        <BrowserRouter>
+          <MainScreen
+            authorized={false}
+            userAvatar={`ava`}
+            userName={`name`}
+            genres={mocks.genres}
+            films={mocks.films}
+            activeGenre={mocks.activeGenre}
+            onGenreClick={jest.fn()}
+          />
+        </BrowserRouter>)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -1,4 +1,5 @@
 import axios from "axios";
+import history from "./history";
 
 const TIMEOUT = 5000;
 
@@ -11,8 +12,8 @@ export const createAPI = () => {
 
   const onSuccess = (response) => response;
   const onFail = (err) => {
-    if (err.status === 400) {
-      return;
+    if (err.status === 403) {
+      history.push(`/login`);
     }
 
     throw err;

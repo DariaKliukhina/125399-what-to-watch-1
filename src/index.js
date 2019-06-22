@@ -6,9 +6,10 @@ import thunk from "redux-thunk";
 import {compose} from "recompose";
 
 import reducer from "./reducer/index.js";
+import {Router} from "react-router-dom";
 import {Operation} from "./reducer/data/data";
 import {createAPI} from "./api";
-
+import history from "./history";
 import App from './components/app/app.jsx';
 
 const init = () => {
@@ -16,9 +17,9 @@ const init = () => {
   const store = createStore(
       reducer,
       compose(
-          applyMiddleware(thunk.withExtraArgument(api)),
-          window.__REDUX_DEVTOOLS_EXTENSION__ &&
-          window.__REDUX_DEVTOOLS_EXTENSION__()
+          applyMiddleware(thunk.withExtraArgument(api))
+          // , window.__REDUX_DEVTOOLS_EXTENSION__ &&
+          // window.__REDUX_DEVTOOLS_EXTENSION__()
       )
   );
 
@@ -26,7 +27,9 @@ const init = () => {
 
   ReactDOM.render(
       <Provider store={store}>
-        <App />
+        <Router history={history}>
+          <App />
+        </Router>
       </Provider>,
       document.querySelector(`#root`)
   );
