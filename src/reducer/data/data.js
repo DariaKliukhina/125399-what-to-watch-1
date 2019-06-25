@@ -116,8 +116,14 @@ const formFilms = (films) => {
       director: film.director,
       preview: film.preview_video_link,
       poster: film.preview_image,
-      isFavorite: film.is_favorite
-    };
+      isFavorite: film.is_favorite,
+      posterImage: film.poster_image,
+      rating: film.rating,
+      released: film.released,
+      runTime: film.run_time,
+      scoresCount: film.scores_count,
+      starring: film.starring,
+      videoLink: film.video_link};
   });
 };
 
