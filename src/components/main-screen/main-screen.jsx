@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Link} from "react-router-dom";
+import {withRouter} from "react-router";
+import {compose} from "redux";
 import PropTypes from 'prop-types';
 import GenreList from "../genre-list/genre-list.jsx";
 import FilmsList from "../films-list/films-list.jsx";
@@ -17,6 +19,9 @@ class MainScreen extends PureComponent {
 
     this._handleClick = this._handleClick.bind(this);
     this._formUserBlock = this._formUserBlock.bind(this);
+    this._handelAvatarClick = this._handelAvatarClick.bind(this);
+    this._displayShowMore = this._displayShowMore.bind(this);
+    this._handelShowMoreClick = this._handelShowMoreClick.bind(this);
   }
 
   _handleClick(film) {
@@ -38,7 +43,7 @@ class MainScreen extends PureComponent {
     } else {
       return (
         <div className="user-block">
-          <div className="user-block__avatar">
+          <div className="user-block__avatar onClick={this._handelAvatarClick}">
             <img src={userAvatar} alt={userName} width="63" height="63" />
           </div>
         </div>
@@ -46,12 +51,39 @@ class MainScreen extends PureComponent {
     }
   }
 
+  _handelAvatarClick() {
+    this.props.history.push(`/favorites`);
+  }
+  _displayShowMore() {
+    const {films, visibleFilms} = this.props;
+    if (films.length > visibleFilms.length) {
+      return (
+        <div className="catalog__more">
+          <button
+            className="catalog__button"
+            type="button"
+            onClick={this._handelShowMoreClick}
+          >
+            Show more
+          </button>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+  _handelShowMoreClick() {
+    const {onShowMoreClick} = this.props;
+    onShowMoreClick();
+  }
+
   render() {
     const {
-      films,
+      visibleFilms,
       genres,
       activeGenre,
-      onGenreClick,
+      changeGenre,
+      setActiveFilm
     } = this.props;
 
     return (
@@ -167,16 +199,15 @@ class MainScreen extends PureComponent {
             <GenreList
               genres={genres}
               activeItem={activeGenre}
-              onGenreClick={onGenreClick} />
+              onGenreClick={changeGenre} />
 
             <FilmsList
-              films={films}
-              onGenreClick={onGenreClick}
+              films={visibleFilms}
+              changeGenre={changeGenre}
+              setActiveFilm={setActiveFilm}
             />
 
-            <div className="catalog__more">
-              <button className="catalog__button" type="button" onClick={onGenreClick}>Show more</button>
-            </div>
+            {this._displayShowMore()}
           </section>
 
           <footer className="page-footer">
@@ -203,14 +234,29 @@ MainScreen.propTypes = {
   userAvatar: PropTypes.string,
   userName: PropTypes.string,
   films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired
   })).isRequired,
   genres: PropTypes.array.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
+  changeGenre: PropTypes.func.isRequired,
+  onShowMoreClick: PropTypes.func.isRequired,
+  setActiveFilm: PropTypes.func.isRequired,
+  visibleFilms: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired
+      })
+  ).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   activeGenre: PropTypes.string.isRequired,
 };
 
-export default MainScreen;
+export default compose(withRouter)(MainScreen);
