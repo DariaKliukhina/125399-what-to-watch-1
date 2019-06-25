@@ -23,8 +23,12 @@ exports[`MovieCard renders correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
-      onClick={[MockFunction]}
+      onClick={[Function]}
+      params={
+        Object {
+          "id": 1,
+        }
+      }
     >
       Macbeth
     </a>

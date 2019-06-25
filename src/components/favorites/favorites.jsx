@@ -1,7 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import withPrivatePath from "../hocs/withPrivatePath/withPrivatePath.jsx";
 
-const Favorites = () => {
+const Favorites = (props) => {
+  const {userAvatar, userName} = props;
+
   return (
     <>
     <div className="visually-hidden">
@@ -110,8 +113,8 @@ const Favorites = () => {
         <div className="user-block">
           <div className="user-block__avatar">
             <img
-              src="img/avatar.jpg"
-              alt="User avatar"
+              src={userAvatar}
+              alt={userName}
               width="63"
               height="63"
             />
@@ -312,5 +315,10 @@ const Favorites = () => {
     </div>
     </>
   );
+};
+
+Favorites.propTypes = {
+  userAvatar: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired
 };
 export default withPrivatePath(Favorites);

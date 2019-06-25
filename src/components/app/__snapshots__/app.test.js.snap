@@ -405,8 +405,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               Fantastic Beasts: The Crimes of Grindelwald
             </a>
@@ -434,8 +438,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               Bohemian Rhapsody
             </a>
@@ -463,8 +471,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               Macbeth
             </a>
@@ -492,8 +504,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               Aviator
             </a>
@@ -521,8 +537,12 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               We need to talk about Kevin
             </a>
@@ -550,24 +570,17 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[MockFunction]}
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
               What We Do in the Shadows
             </a>
           </h3>
         </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          onClick={[MockFunction]}
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer

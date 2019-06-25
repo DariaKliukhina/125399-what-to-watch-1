@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import withVideo from "../hocs/withVideo/withVideo.jsx";
+import {withRouter} from "react-router";
+import {compose} from "redux";
 import VideoPlayer from '../video-player/video-player.jsx';
 
 const SIZES = {
@@ -12,27 +13,26 @@ class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      timerId: null,
-      isPreviewPlaying: false,
-    };
+    this._videoRef = React.createRef();
 
+    this._handelMouseEnter = this._handelMouseEnter.bind(this);
+    this._handelMouseLeave = this._handelMouseLeave.bind(this);
+    this._handelLinkClick = this._handelLinkClick.bind(this);
+  }
 
-    this._mouseEnterHandler = this._mouseEnterHandler.bind(this);
-    this._mouseLeaveHandler = this._mouseLeaveHandler.bind(this);
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   render() {
-    const {film, onGenreClick} = this.props;
-    const {name, preview, poster} = film;
-    const {isPreviewPlaying} = this.state;
+    const {title, poster, preview, id} = this.props;
     const {width, height} = SIZES;
 
     return (<article
       ref={this._filmCardRef}
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={this._mouseEnterHandler}
-      onMouseLeave={this._mouseLeaveHandler}>
+      onMouseEnter={this._handelMouseEnter}
+      onMouseLeave={this._handelMouseLeave}>
       <div className="small-movie-card__image">
         <VideoPlayer
           options={
@@ -41,39 +41,60 @@ class MovieCard extends PureComponent {
               height,
             }
           }
-          videoSrc={preview}
-          posterSrc={poster}
+          preview={preview}
+          poster={poster}
           muted={true}
-          isPlaying={isPreviewPlaying}
+          ref={this._videoRef}
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onGenreClick}>{name}</a>
+        <a className="small-movie-card__link" params={{id}} onClick={this._handelLinkClick}>{title}</a>
       </h3>
     </article>);
   }
 
-  _mouseEnterHandler() {
-    this._timer = setTimeout(() => {
-      this.setState({isPreviewPlaying: true});
-    }, 1000);
+  _handelLinkClick() {
+    const {changeGenre, setActiveFilm, genre, id} = this.props;
+    changeGenre(genre);
+    setActiveFilm(id);
+    this.props.history.push(`/film/${id}`, {id});
   }
 
-  _mouseLeaveHandler() {
-    clearTimeout(this._timer);
-    this.setState({isPreviewPlaying: false});
+  _handelMouseEnter() {
+    const {id, onCardEnter} = this.props;
+
+    this.timer = setTimeout(
+        function () {
+          this._videoRef.current.video.current.play();
+        }.bind(this),
+        1000
+    );
+
+    onCardEnter(id);
+  }
+
+  _handelMouseLeave() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this._videoRef.current.video.current.load();
+    }
   }
 }
 
 MovieCard.propTypes = {
-  film: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired
-  }).isRequired,
-  onGenreClick: PropTypes.func,
-  onHover: PropTypes.func,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
+  changeGenre: PropTypes.func,
+  setActiveFilm: PropTypes.func,
+  onCardEnter: PropTypes.func,
+  genre: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };
 
-export default withVideo(MovieCard);
+export {MovieCard};
+
+export default compose(withRouter)(MovieCard);

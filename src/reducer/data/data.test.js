@@ -3,80 +3,133 @@ import {createAPI} from "../../api";
 import {
   formFilms,
   formGenres,
-  ActionCreator,
   ActionType,
   Operation,
+  ActionCreator,
   reducer
-} from "./data.js";
-
+} from "./data";
+/* eslint camelcase: 0*/
 const mocks = {
-  films: [
-    {
-      name: `John Wick`,
-      genre: `Crime`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    },
-    {
-      name: `Killers Bodyguard`,
-      genre: `Comedies`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
-    },
-    {
-      name: `Star Wars`,
-      genre: `Sci-Fi`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    },
-    {
-      name: `The Grand Budapest Hotel`,
-      genre: `Dramas`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
-    },
-    {
-      name: `The Cabin in the Woods`,
-      genre: `Thrillers`,
-      poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    }
-  ],
-
-  /* eslint camelcase: 0*/
-
   loadedFilms: [
     {
-      name: `John Wick`,
-      genre: `Crime`,
-      preview_image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      background_color: `#92918B`,
+      background_image: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+      description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+      director: `Alejandro G. Iñárritu`,
+      genre: `Action`,
+      id: 1,
+      is_favorite: false,
+      name: `The Revenant`,
+      poster_image: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+      preview_image: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 8,
+      released: 2015,
+      run_time: 156,
+      scores_count: 618498,
+      starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+      video_link: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
     },
     {
-      name: `Killers Bodyguard`,
-      genre: `Comedies`,
-      preview_image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview_video_link: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      background_color: `#92918B`,
+      background_image: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+      description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+      director: `Alejandro G. Iñárritu`,
+      genre: `Drama`,
+      id: 2,
+      is_favorite: true,
+      name: `The Revenant`,
+      poster_image: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+      preview_image: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 8,
+      released: 202115,
+      run_time: 156,
+      scores_count: 618498,
+      starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+      video_link: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
     },
     {
-      name: `Star Wars`,
-      genre: `Sci-Fi`,
-      preview_image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      background_color: `#92918B`,
+      background_image: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+      description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+      director: `Alejandro G. Iñárritu`,
+      genre: `Comedy`,
+      id: 3,
+      is_favorite: false,
+      name: `The Revenasdasant`,
+      poster_image: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+      preview_image: `https://es31-server.apasdapspot.com/wtw/static/film/preview/revenant.jpg`,
+      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 8,
+      released: 2015,
+      run_time: 156,
+      scores_count: 618498,
+      starring: [(`Leonardo DiasdCaprio`, `Tom Hardy`)],
+      video_link: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
+    }
+  ],
+  /* eslint-disable no-underscore-dangle */
+  films: [
+    {
+      backgroundColor: `#92918B`,
+      backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+      description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+      director: `Alejandro G. Iñárritu`,
+      genre: `Action`,
+      id: 1,
+      isFavorite: false,
+      name: `The Revenant`,
+      posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+      poster: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 8,
+      released: 2015,
+      runTime: 156,
+      scoresCount: 618498,
+      starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+      videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
     },
     {
-      name: `The Grand Budapest Hotel`,
-      genre: `Dramas`,
-      preview_image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview_video_link: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      backgroundColor: `#92918B`,
+      backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+      description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+      director: `Alejandro G. Iñárritu`,
+      genre: `Drama`,
+      id: 2,
+      isFavorite: true,
+      name: `The Revenant`,
+      posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+      poster: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 8,
+      released: 202115,
+      runTime: 156,
+      scoresCount: 618498,
+      starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+      videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
     },
     {
-      name: `The Cabin in the Woods`,
-      genre: `Thrillers`,
-      preview_image: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview_video_link: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      backgroundColor: `#92918B`,
+      backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+      description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+      director: `Alejandro G. Iñárritu`,
+      genre: `Comedy`,
+      id: 3,
+      isFavorite: false,
+      name: `The Revenasdasant`,
+      posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+      poster: `https://es31-server.apasdapspot.com/wtw/static/film/preview/revenant.jpg`,
+      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+      rating: 8,
+      released: 2015,
+      runTime: 156,
+      scoresCount: 618498,
+      starring: [(`Leonardo DiasdCaprio`, `Tom Hardy`)],
+      videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
     }
   ]
+  /* eslint-enable */
 };
 
 describe(`Business logic is correct`, () => {
@@ -87,11 +140,9 @@ describe(`Business logic is correct`, () => {
   it(`Form sorted genres array with All genres at first place after films loaded`, () => {
     expect(formGenres(mocks.loadedFilms)).toEqual([
       `All genres`,
-      `Comedies`,
-      `Crime`,
-      `Dramas`,
-      `Sci-Fi`,
-      `Thrillers`
+      `Action`,
+      `Comedy`,
+      `Drama`
     ]);
   });
 });
@@ -156,6 +207,8 @@ describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       activeGenre: `All genres`,
+      activeFilm: {},
+      visibleFilms: [],
       films: [],
       loadedFilms: [],
       genres: []
@@ -188,7 +241,7 @@ describe(`Reducer works correctly`, () => {
     expect(
         reducer(
             {
-              activeGenre: `Sci-Fi`,
+              activeGenre: `Action`,
               films: mocks.films,
               loadedFilms: mocks.films,
               genres: []
@@ -198,15 +251,28 @@ describe(`Reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      activeGenre: `Sci-Fi`,
+      activeGenre: `Action`,
       loadedFilms: mocks.films,
       genres: [],
       films: [
         {
-          name: `Star Wars`,
-          genre: `Sci-Fi`,
-          poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-          preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+          backgroundColor: `#92918B`,
+          backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+          description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+          director: `Alejandro G. Iñárritu`,
+          genre: `Action`,
+          id: 1,
+          isFavorite: false,
+          name: `The Revenant`,
+          posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+          poster: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+          preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+          rating: 8,
+          released: 2015,
+          runTime: 156,
+          scoresCount: 618498,
+          starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+          videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
         }
       ]
     });
@@ -216,15 +282,28 @@ describe(`Reducer works correctly`, () => {
     expect(
         reducer(
             {
-              activeGenre: `Sci-Fi`,
+              activeGenre: `Action`,
               loadedFilms: mocks.films,
               genres: [],
               films: [
                 {
-                  name: `Star Wars`,
-                  genre: `Sci-Fi`,
-                  poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-                  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+                  backgroundColor: `#92918B`,
+                  backgroundImage: `https://es31-server.appspot.com/wtw/static/film/background/Revenant.jpg`,
+                  description: `A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.`,
+                  director: `Alejandro G. Iñárritu`,
+                  genre: `Action`,
+                  id: 1,
+                  isFavorite: false,
+                  name: `The Revenant`,
+                  posterImage: `https://es31-server.appspot.com/wtw/static/film/poster/Revenant.jpg`,
+                  poster: `https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg`,
+                  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+                  rating: 8,
+                  released: 2015,
+                  runTime: 156,
+                  scoresCount: 618498,
+                  starring: [(`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`)],
+                  videoLink: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`
                 }
               ]
             },
@@ -233,7 +312,7 @@ describe(`Reducer works correctly`, () => {
             }
         )
     ).toEqual({
-      activeGenre: `Sci-Fi`,
+      activeGenre: `Action`,
       films: mocks.films,
       loadedFilms: mocks.films,
       genres: []
@@ -249,7 +328,7 @@ describe(`Reducer works correctly`, () => {
     apiMock.onGet(`/films`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenCalledTimes(4);
     });
   });
 });
