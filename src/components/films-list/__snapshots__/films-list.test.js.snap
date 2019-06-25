@@ -26,8 +26,12 @@ exports[`FilmsList screen renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         Fantastic Beasts: The Crimes of Grindelwald
       </a>
@@ -55,8 +59,12 @@ exports[`FilmsList screen renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         Bohemian Rhapsody
       </a>
@@ -84,8 +92,12 @@ exports[`FilmsList screen renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         Macbeth
       </a>
@@ -113,8 +125,12 @@ exports[`FilmsList screen renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         Aviator
       </a>
@@ -142,8 +158,12 @@ exports[`FilmsList screen renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         We need to talk about Kevin
       </a>
@@ -171,8 +191,12 @@ exports[`FilmsList screen renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[MockFunction]}
+        onClick={[Function]}
+        params={
+          Object {
+            "id": 1,
+          }
+        }
       >
         What We Do in the Shadows
       </a>

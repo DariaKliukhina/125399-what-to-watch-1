@@ -19,6 +19,8 @@ describe(`SignIn:`, () => {
               emailError={false}
               passwordError={false}
               authorizationFailed={false}
+              authorized={false}
+              history={{push: mocks.functionHandler}}
             />
           </BrowserRouter>
       )

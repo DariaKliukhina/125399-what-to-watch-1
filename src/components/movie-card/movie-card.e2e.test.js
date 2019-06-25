@@ -1,49 +1,57 @@
 import React from "react";
-import {configure, mount} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import MovieCard from "./movie-card.jsx";
+import {BrowserRouter} from "react-router-dom";
 
-import MovieCard from './movie-card.jsx';
+Enzyme.configure({adapter: new Adapter()});
 
-configure({adapter: new Adapter()});
-
-const mock = {
-  film: {
-    genre: `Dramas`,
-    name: `Macbeth`,
-    poster: `picture.jpg`,
-    preview: `video.mp4`
-  }
+const mockedFilm = {
+  id: 1,
+  title: `John Wick`,
+  genre: `Action`,
+  poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 
-it(`Film title correctly triggered click event `, () => {
-  const onGenreClick = jest.fn();
-  const props = {
-    film: mock.film,
-    onGenreClick,
-  };
-
-  const movieCard = mount(<MovieCard {...props}/>);
-
-  const titleLink = movieCard.find(`.small-movie-card__link`);
-
-  titleLink.simulate(`click`, {preventDefault() {}});
-
-  expect(onGenreClick).toHaveBeenCalledTimes(1);
+const mocks = Object.assign(mockedFilm, {
+  mouseHandler: jest.fn()
 });
 
-it(`On mouse enter on film card correctly triggered mouse enter handler`, () => {
-  const onGenreClick = jest.fn();
-  const props = {
-    film: mock.film,
-    onGenreClick,
-  };
-  jest.useFakeTimers();
+describe(`MovieCard:`, () => {
+  it(`Card should run callback on mouse enter`, () => {
+    const movieCard = mount(
+        <BrowserRouter>
+          <MovieCard
+            id={mocks.id}
+            title={mocks.title}
+            genre={mocks.genre}
+            poster={mocks.poster}
+            preview={mocks.preview}
+            onCardEnter={mocks.mouseHandler}
+          />
+        </BrowserRouter>
+    );
 
-  const movieCard = mount(<MovieCard {...props}/>);
+    movieCard.simulate(`mouseenter`);
+    expect(mocks.mouseHandler).toHaveBeenCalledTimes(1);
+  });
 
-  const link = movieCard.find(`.small-movie-card__link`);
+  it(`Card should return film index on mouse enter`, () => {
+    const movieCard = mount(
+        <BrowserRouter>
+          <MovieCard
+            id={mocks.id}
+            title={mocks.title}
+            genre={mocks.genre}
+            poster={mocks.poster}
+            preview={mocks.preview}
+            onCardEnter={mocks.mouseHandler}
+          />
+        </BrowserRouter>
+    );
 
-  link.simulate(`click`);
-
-  expect(onGenreClick).toHaveBeenCalledTimes(1);
+    movieCard.simulate(`mouseleave`);
+    expect(mocks.mouseHandler).toHaveBeenCalledWith(mocks.id);
+  });
 });

@@ -162,9 +162,9 @@ Array [
           className="user-block__avatar"
         >
           <img
-            alt="User avatar"
+            alt="User"
             height="63"
-            src="img/avatar.jpg"
+            src="avatar"
             width="63"
           />
         </div>
