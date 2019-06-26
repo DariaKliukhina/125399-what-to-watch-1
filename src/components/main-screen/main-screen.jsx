@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import UserBlock from "../userBlock/user-block.jsx";
-
+import withPlayer from "../hocs/withPlayer/with-player.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 import PropTypes from 'prop-types';
@@ -237,5 +237,6 @@ MainScreen.propTypes = {
 };
 
 export default compose(
-    withRouter
+    withRouter,
+    withPlayer
 )(MainScreen);
