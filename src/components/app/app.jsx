@@ -7,6 +7,8 @@ import {ActionCreator} from "../../reducer/data/data";
 import Favorites from "../favorites/favorites.jsx";
 import SignIn from "../signIn/signIn.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import {withRouter} from "react-router";
+import {compose} from "redux";
 
 const App = (props) => {
   const {
@@ -17,11 +19,15 @@ const App = (props) => {
     visibleFilms,
     changeGenre,
     onShowMoreClick,
-    currentUser,
     activeFilm,
     setActiveFilm
   } = props;
 
+  const homeRedirect = () => {
+    setActiveFilm();
+    changeGenre();
+    props.history.push(`/`);
+  };
 
   const mainProps = {
     authorized,
@@ -33,14 +39,11 @@ const App = (props) => {
     onShowMoreClick,
     activeFilm,
     setActiveFilm,
-    userAvatar: `https://es31-server.appspot.com/` + currentUser.userAvatar,
-    userName: currentUser.userName
   };
 
   const favoritesProps = {
     authorized,
-    userAvatar: `https://es31-server.appspot.com/` + currentUser.userAvatar,
-    userName: currentUser.userName
+    homeRedirect
   };
 
   const filmProps = {
@@ -48,7 +51,8 @@ const App = (props) => {
     activeGenre,
     setActiveFilm,
     changeGenre,
-    visibleFilms
+    visibleFilms,
+    homeRedirect
   };
 
   return (
@@ -67,6 +71,7 @@ App.propTypes = {
   genres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
   activeFilm: PropTypes.object.isRequired,
+  history: PropTypes.object,
   visibleFilms: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -115,12 +120,17 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setActiveFilm: (filmId = null) => {
     dispatch(ActionCreator.changeActiveFilm(filmId));
+    dispatch(ActionCreator.clearVisibleFilms());
+    dispatch(ActionCreator.formVisibleFilms());
   }
 });
 
 export {App};
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    ),
+    withRouter
 )(App);
