@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import UserBlock from "../userBlock/user-block.jsx";
-import withPrivatePath from "../hocs/withPrivatePath/withPrivatePath.jsx";
+import UserBlock from "../user-block/user-block.jsx";
+import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
 
 const Favorites = (props) => {
   const {homeRedirect: _handelHomeLinkClick} = props;

@@ -3,7 +3,7 @@ import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 // Component
-import withActiveItem from "./withActiveItem.jsx";
+import withActiveItem from "./with-active-item.jsx";
 
 configure({adapter: new Adapter()});
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {Operation} from "../../reducer/user/user";
-import withErrors from "../hocs/withErrors/withErrors.jsx";
+import withErrors from "../hocs/with-errors/with-errors.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 

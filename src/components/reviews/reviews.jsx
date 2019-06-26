@@ -1,132 +1,120 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {compose} from "redux";
+
+import {Operation, actionClearReviews} from "../../reducer/reviews/reviews.js";
 
 class Reviews extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._formDate = this._formDate.bind(this);
+  }
+
+  componentDidMount() {
+    const {loadReviews, activeFilmId} = this.props;
+
+    loadReviews(activeFilmId);
+  }
+
+  componentWillUnmount() {
+    const {clearReviews} = this.props;
+
+    clearReviews();
+  }
+
+  _formDate(dateStamp) {
+    const date = new Date(dateStamp);
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+
+    return `${month} ${day}, ${year}.`;
   }
 
   render() {
+    const {reviews} = this.props;
+
     return (
       <>
       <div className="movie-card__reviews movie-card__row">
         <div className="movie-card__reviews-col">
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">
-                Discerning travellers and Wes Anderson fans will luxuriate in
-                the glorious Mittel-European kitsch of one of the director's
-                funniest and most exquisitely designed movies in years.
-              </p>
+          {reviews.map((review, index) => {
+            if (!(index % 2)) {
+              return (
+                <div className="review" key={`${index}${review.user.name}`}>
+                  <blockquote className="review__quote">
+                    <p className="review__text">{review.comment}</p>
 
-              <footer className="review__details">
-                <cite className="review__author">Kate Muir</cite>
-                <time className="review__date" dateTime="2016-12-24">
-                  December 24, 2016
-                </time>
-              </footer>
-            </blockquote>
+                    <footer className="review__details">
+                      <cite className="review__author">
+                        {review.user.name}
+                      </cite>
+                      <time className="review__date" dateTime={review.date}>
+                        {this._formDate(review.date)}
+                      </time>
+                    </footer>
+                  </blockquote>
 
-            <div className="review__rating">8,9</div>
-          </div>
+                  <div className="review__rating">{review.rating}</div>
+                </div>
+              );
+            }
 
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">
-                Anderson's films are too precious for some, but for those of
-                us willing to lose ourselves in them, they're a delight. "The
-                Grand Budapest Hotel" is no different, except that he has
-                added a hint of gravitas to the mix, improving the recipe.
-              </p>
-
-              <footer className="review__details">
-                <cite className="review__author">Bill Goodykoontz</cite>
-                <time className="review__date" dateTime="2015-11-18">
-                  November 18, 2015
-                </time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">8,0</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">
-                I didn't find it amusing, and while I can appreciate the
-                creativity, it's an hour and 40 minutes I wish I could take
-                back.
-              </p>
-
-              <footer className="review__details">
-                <cite className="review__author">Amanda Greever</cite>
-                <time className="review__date" dateTime="2015-11-18">
-                  November 18, 2015
-                </time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">8,0</div>
-          </div>
+            return null;
+          })}
         </div>
         <div className="movie-card__reviews-col">
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">
-                The mannered, madcap proceedings are often delightful,
-                occasionally silly, and here and there, gruesome and/or
-                heartbreaking.
-              </p>
+          {reviews.map((review, index) => {
+            if (index % 2) {
+              return (
+                <div className="review" key={`${index}${review.user.name}`}>
+                  <blockquote className="review__quote">
+                    <p className="review__text">{review.comment}</p>
 
-              <footer className="review__details">
-                <cite className="review__author">Matthew Lickona</cite>
-                <time className="review__date" dateTime="2016-12-20">
-                  December 20, 2016
-                </time>
-              </footer>
-            </blockquote>
+                    <footer className="review__details">
+                      <cite className="review__author">
+                        {review.user.name}
+                      </cite>
+                      <time className="review__date" dateTime={review.date}>
+                        {this._formDate(review.date)}
+                      </time>
+                    </footer>
+                  </blockquote>
 
-            <div className="review__rating">7,2</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">
-                It is certainly a magical and childlike way of storytelling,
-                even if the content is a little more adult.
-              </p>
-
-              <footer className="review__details">
-                <cite className="review__author">Paula Fleri-Soler</cite>
-                <time className="review__date" dateTime="2016-12-20">
-                  December 20, 2016
-                </time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">7,6</div>
-          </div>
-
-          <div className="review">
-            <blockquote className="review__quote">
-              <p className="review__text">
-                It is certainly a magical and childlike way of storytelling,
-                even if the content is a little more adult.
-              </p>
-
-              <footer className="review__details">
-                <cite className="review__author">Paula Fleri-Soler</cite>
-                <time className="review__date" dateTime="2016-12-20">
-                  December 20, 2016
-                </time>
-              </footer>
-            </blockquote>
-
-            <div className="review__rating">7,0</div>
-          </div>
+                  <div className="review__rating">{review.rating}</div>
+                </div>
+              );
+            }
+            return null;
+          })}
         </div>
       </div>
       </>
     );
   }
 }
-export default Reviews;
+Reviews.propTypes = {
+  reviews: PropTypes.array.isRequired,
+  loadReviews: PropTypes.func.isRequired,
+  activeFilmId: PropTypes.number.isRequired,
+  clearReviews: PropTypes.func.isRequired,
+};
+const mapStateToProps = (state) => ({
+  reviews: state.reviews.reviews
+});
+const mapDispatchToProps = (dispatch) => ({
+  loadReviews: (filmId) => {
+    dispatch(Operation.loadReviews(filmId));
+  },
+  clearReviews: () => {
+    dispatch(actionClearReviews());
+  }
+});
+export default compose(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )
+)(Reviews);
