@@ -2,15 +2,53 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {compose} from "redux";
 import {withRouter} from "react-router";
-import {Link} from "react-router-dom";
+import {Route, Link} from "react-router-dom";
+import UserBlock from "../userBlock/user-block.jsx";
+import FilmsList from "../films-list/films-list.jsx";
+import Overview from "../overview/overview.jsx";
+import Details from "../details/details.jsx";
+import Reviews from "../reviews/reviews.jsx";
+
+const MAXIMUM_RECOMMENDED_FILMS_NUMBER = 4;
 
 class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
+    this._formRecommendedBlock = this._formRecommendedBlock.bind(this);
   }
 
+  _handelHomeLinkClick() {
+    const {homeRedirect} = this.props;
+
+    homeRedirect();
+  }
+
+  _formRecommendedBlock(recommendedFilms) {
+    const {setActiveFilm, changeGenre} = this.props;
+    if (recommendedFilms.length) {
+      return (
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+
+          <FilmsList
+            films={recommendedFilms}
+            changeGenre={changeGenre}
+            setActiveFilm={setActiveFilm}
+          />
+        </section>
+      );
+    }
+
+    return null;
+  }
   render() {
-    const {film} = this.props;
+    const {film, visibleFilms, match} = this.props;
+    const recommendedFilms =
+      visibleFilms.length > MAXIMUM_RECOMMENDED_FILMS_NUMBER
+        ? visibleFilms.slice(0, MAXIMUM_RECOMMENDED_FILMS_NUMBER)
+        : visibleFilms;
 
     return (
       <>
@@ -116,31 +154,22 @@ class MoviePage extends PureComponent {
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <Link to="/" className="logo__link">
+              <a className="logo__link" onClick={this._handelHomeLinkClick}>
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </Link>
+              </a>
             </div>
 
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img
-                  src="img/avatar.jpg"
-                  alt="User avatar"
-                  width="63"
-                  height="63"
-                />
-              </div>
-            </div>
+            <UserBlock />
           </header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{film.name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{film.genre}</span>
+                <span className="movie-card__year">{film.release}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -184,136 +213,62 @@ class MoviePage extends PureComponent {
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">
+                  <li className="movie-nav__item">
+                    <Link
+                      to={`${match.url}/overview`}
+                      className="movie-nav__link"
+                    >
                       Overview
-                    </a>
+                    </Link>
                   </li>
                   <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">
+                    <Link
+                      to={`${match.url}/details`}
+                      className="movie-nav__link"
+                    >
                       Details
-                    </a>
+                    </Link>
                   </li>
                   <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">
+                    <Link
+                      to={`${match.url}/reviews`}
+                      className="movie-nav__link"
+                    >
                       Reviews
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
+              <Route
+                path={match.url}
+                exact
+                render={() => <Overview film={film} />}
+              />
+              <Route
+                path={match.url + `/overview`}
+                render={() => <Overview film={film} />}
+              />
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{film.rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">Very good</span>
-                  <span className="movie-rating__count">
-                    {film.scoresCount} ratings
-                  </span>
-                </p>
-              </div>
+              <Route
+                path={match.url + `/details`}
+                render={() => <Details film={film} />}
+              />
 
-              <div className="movie-card__text">
-                <p>{film.description}</p>
-
-                <p className="movie-card__director">
-                  <strong>{film.director}</strong>
-                </p>
-
-                <p className="movie-card__starring">
-                  <strong>{film.starring.join(`, `)}</strong>
-                </p>
-              </div>
+              <Route
+                path={match.url + `/Reviews`}
+                render={() => <Reviews />}
+              />
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">
-                Play
-              </button>
-              <div className="small-movie-card__image">
-                <img
-                  src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Fantastic Beasts: The Crimes of Grindelwald
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">
-                Play
-              </button>
-              <div className="small-movie-card__image">
-                <img
-                  src="img/bohemian-rhapsody.jpg"
-                  alt="Bohemian Rhapsody"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Bohemian Rhapsody
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">
-                Play
-              </button>
-              <div className="small-movie-card__image">
-                <img
-                  src="img/macbeth.jpg"
-                  alt="Macbeth"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Macbeth
-                </a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <button className="small-movie-card__play-btn" type="button">
-                Play
-              </button>
-              <div className="small-movie-card__image">
-                <img
-                  src="img/aviator.jpg"
-                  alt="Aviator"
-                  width="280"
-                  height="175"
-                />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
-                  Aviator
-                </a>
-              </h3>
-            </article>
-          </div>
-        </section>
+        {this._formRecommendedBlock(recommendedFilms)}
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <a onClick={this._handelHomeLinkClick} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -331,6 +286,11 @@ class MoviePage extends PureComponent {
 }
 
 MoviePage.propTypes = {
+  visibleFilms: PropTypes.array.isRequired,
+  homeRedirect: PropTypes.func.isRequired,
+  setActiveFilm: PropTypes.func.isRequired,
+  changeGenre: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
   film: PropTypes.shape({
     posterImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

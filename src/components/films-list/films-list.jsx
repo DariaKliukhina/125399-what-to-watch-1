@@ -6,7 +6,6 @@ import MovieCard from '../movie-card/movie-card.jsx';
 const FilmsList = (props) => {
   const {
     films,
-    changeActiveItem: handelActiveCardChange,
     changeGenre,
     setActiveFilm
   } = props;
@@ -21,7 +20,6 @@ const FilmsList = (props) => {
           poster={film.poster}
           genre={film.genre}
           preview={film.preview}
-          onCardEnter={handelActiveCardChange}
           changeGenre={changeGenre}
           setActiveFilm={setActiveFilm}
         />
@@ -38,7 +36,6 @@ FilmsList.propTypes = {
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired
   })).isRequired,
-  changeActiveItem: PropTypes.func,
   changeGenre: PropTypes.func,
   setActiveFilm: PropTypes.func
 };
