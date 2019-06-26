@@ -32,7 +32,8 @@ class MovieCard extends PureComponent {
       ref={this._filmCardRef}
       className="small-movie-card catalog__movies-card"
       onMouseEnter={this._handelMouseEnter}
-      onMouseLeave={this._handelMouseLeave}>
+      onMouseLeave={this._handelMouseLeave}
+      onClick={this._handelLinkClick}>
       <div className="small-movie-card__image">
         <VideoPlayer
           options={
@@ -48,7 +49,10 @@ class MovieCard extends PureComponent {
         />
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" params={{id}} onClick={this._handelLinkClick}>{title}</a>
+        <a className="small-movie-card__link" params={{id}} href="#"
+          onClick={(evt) => {
+            evt.preventDefault();
+          }}>{title}</a>
       </h3>
     </article>);
   }

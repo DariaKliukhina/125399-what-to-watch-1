@@ -29,31 +29,31 @@ class Overview extends PureComponent {
   }
 
   render() {
-    const {film} = this.props;
+    const {activeFilm} = this.props;
 
     return (
       <>
       <div className="movie-rating">
-        <div className="movie-rating__score">{film.rating}</div>
+        <div className="movie-rating__score">{activeFilm.rating}</div>
         <p className="movie-rating__meta">
           <span className="movie-rating__level">
-            {this._formTextRating(film.rating)}
+            {this._formTextRating(activeFilm.rating)}
           </span>
           <span className="movie-rating__count">
-            {film.scoresCount} ratings
+            {activeFilm.scoresCount} ratings
           </span>
         </p>
       </div>
 
       <div className="movie-card__text">
-        <p>{film.description}</p>
+        <p>{activeFilm.description}</p>
 
         <p className="movie-card__director">
-          <strong>{film.director}</strong>
+          <strong>{activeFilm.director}</strong>
         </p>
 
         <p className="movie-card__starring">
-          <strong>{film.starring.join(`, `)}</strong>
+          <strong>{activeFilm.starring.join(`, `)}</strong>
         </p>
       </div>
       </>
@@ -62,7 +62,7 @@ class Overview extends PureComponent {
 }
 
 Overview.propTypes = {
-  film: PropTypes.object.isRequired,
+  activeFilm: PropTypes.object.isRequired,
 };
 
 export default Overview;

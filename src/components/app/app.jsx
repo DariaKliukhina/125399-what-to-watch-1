@@ -5,7 +5,7 @@ import {Switch, Route} from "react-router-dom";
 import MainScreen from '../main-screen/main-screen.jsx';
 import {ActionCreator} from "../../reducer/data/data";
 import Favorites from "../favorites/favorites.jsx";
-import SignIn from "../signIn/signIn.jsx";
+import SignIn from "../sign-in/signIn.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
@@ -47,7 +47,7 @@ const App = (props) => {
   };
 
   const filmProps = {
-    film: activeFilm,
+    activeFilm,
     activeGenre,
     setActiveFilm,
     changeGenre,

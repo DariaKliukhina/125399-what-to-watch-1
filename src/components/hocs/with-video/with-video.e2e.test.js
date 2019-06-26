@@ -2,7 +2,7 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import withVideo from "./withVideo.jsx";
+import withVideo from "./with-video.jsx";
 
 configure({adapter: new Adapter()});
 
