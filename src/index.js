@@ -22,6 +22,7 @@ const init = () => {
       )
   );
 
+  store.dispatch(Operation.loadPromo());
   store.dispatch(Operation.loadFilms());
 
   ReactDOM.render(

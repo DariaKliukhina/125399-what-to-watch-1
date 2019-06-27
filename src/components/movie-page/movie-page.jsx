@@ -20,12 +20,23 @@ class MoviePage extends PureComponent {
     this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
     this._formRecommendedBlock = this._formRecommendedBlock.bind(this);
     this._handlePlayClick = this._handlePlayClick.bind(this);
+    this._handelFavoriteClick = this._handelFavoriteClick.bind(this);
   }
 
   _handlePlayClick() {
     const {togglePlayer} = this.props;
 
     togglePlayer();
+  }
+
+  _handelFavoriteClick() {
+    const {addFilmToFavorite, activeFilm, authorized, history} = this.props;
+
+    if (authorized) {
+      addFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
+    } else {
+      history.push(`/login`);
+    }
   }
 
   _handelHomeLinkClick() {
@@ -194,6 +205,7 @@ class MoviePage extends PureComponent {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
+                  onClick={this._handelFavoriteClick}
                 >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add" />
@@ -276,6 +288,8 @@ MoviePage.propTypes = {
   changeGenre: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   togglePlayer: PropTypes.func.isRequired,
+  addFilmToFavorite: PropTypes.func.isRequired,
+  authorized: PropTypes.bool.isRequired,
   activeFilm: PropTypes.shape({
     posterImage: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -283,7 +297,10 @@ MoviePage.propTypes = {
     director: PropTypes.string.isRequired,
     scoresCount: PropTypes.number.isRequired,
     starring: PropTypes.array
-  })
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export {MoviePage};

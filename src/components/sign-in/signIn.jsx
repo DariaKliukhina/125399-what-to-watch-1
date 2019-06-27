@@ -24,8 +24,9 @@ class SignIn extends PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.props.authorized) {
-      this.props.history.push(`/`);
+    const {authorized, history} = this.props;
+    if (authorized) {
+      history.goBack();
     }
   }
 
