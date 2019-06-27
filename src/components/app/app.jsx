@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
 import MainScreen from '../main-screen/main-screen.jsx';
-import {ActionCreator} from "../../reducer/data/data";
+import {ActionCreator, Operation} from "../../reducer/data/data";
 import Favorites from "../favorites/favorites.jsx";
 import SignIn from "../sign-in/signIn.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -20,7 +20,8 @@ const App = (props) => {
     changeGenre,
     onShowMoreClick,
     activeFilm,
-    setActiveFilm
+    setActiveFilm,
+    addFilmToFavorite,
   } = props;
 
   const homeRedirect = () => {
@@ -39,20 +40,25 @@ const App = (props) => {
     onShowMoreClick,
     activeFilm,
     setActiveFilm,
+    addFilmToFavorite
   };
 
   const favoritesProps = {
     authorized,
-    homeRedirect
+    homeRedirect,
+    changeGenre,
+    setActiveFilm
   };
 
   const filmProps = {
+    authorized,
     activeFilm,
     activeGenre,
     setActiveFilm,
     changeGenre,
     visibleFilms,
-    homeRedirect
+    homeRedirect,
+    addFilmToFavorite
   };
 
   return (
@@ -89,7 +95,8 @@ App.propTypes = {
   }),
   changeGenre: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired
+  setActiveFilm: PropTypes.func.isRequired,
+  addFilmToFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -121,7 +128,10 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveFilm: (filmId = null) => {
     dispatch(ActionCreator.changeActiveFilm(filmId));
     dispatch(ActionCreator.clearVisibleFilms());
-    dispatch(ActionCreator.formVisibleFilms());
+    dispatch(ActionCreator.formVisibleFilms(filmId));
+  },
+  addFilmToFavorite: (filmId, filmStatus) => {
+    dispatch(Operation.addFilmToFavourite(filmId, filmStatus));
   }
 });
 

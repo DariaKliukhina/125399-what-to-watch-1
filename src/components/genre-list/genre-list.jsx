@@ -8,6 +8,7 @@ const GenreList = (props) => {
     changeActiveItem: handelGenreClick,
     genres
   } = props;
+
   return (
     <ul className="catalog__genres-list">
       {genres.map((genre, index) => (

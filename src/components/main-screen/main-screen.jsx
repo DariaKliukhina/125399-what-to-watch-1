@@ -21,12 +21,23 @@ class MainScreen extends PureComponent {
     this._handlePlayClick = this._handlePlayClick.bind(this);
     this._displayShowMore = this._displayShowMore.bind(this);
     this._handelShowMoreClick = this._handelShowMoreClick.bind(this);
+    this._handelFavoriteClick = this._handelFavoriteClick.bind(this);
   }
 
   _handlePlayClick() {
     const {togglePlayer} = this.props;
 
     togglePlayer();
+  }
+
+  _handelFavoriteClick() {
+    const {addFilmToFavorite, activeFilm, authorized, history} = this.props;
+
+    if (authorized) {
+      addFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
+    } else {
+      history.push(`/login`);
+    }
   }
 
   _displayShowMore() {
@@ -158,7 +169,7 @@ class MainScreen extends PureComponent {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list movie-card__button" type="button">
+                  <button className="btn btn--list movie-card__button" type="button" onClick={this._handelFavoriteClick}>
                     <svg viewBox="0 0 19 20" width="19" height="20">
                       <use xlinkHref="#add"></use>
                     </svg>
@@ -208,6 +219,8 @@ class MainScreen extends PureComponent {
 }
 
 MainScreen.propTypes = {
+  authorized: PropTypes.bool.isRequired,
+  addFilmToFavorite: PropTypes.func.isRequired,
   activeFilm: PropTypes.object.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
