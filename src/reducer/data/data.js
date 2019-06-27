@@ -74,7 +74,7 @@ const ActionCreator = {
       payload: promoFilm
     };
   },
-  lLoadFavoriteFilms: (loadedFilms) => {
+  loadFavoriteFilms: (loadedFilms) => {
     return {
       type: ActionType.LOAD_FAVORITE_FILMS,
       payload: loadedFilms
