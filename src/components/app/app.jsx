@@ -7,6 +7,7 @@ import {ActionCreator, Operation} from "../../reducer/data/data";
 import Favorites from "../favorites/favorites.jsx";
 import SignIn from "../sign-in/signIn.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import ReviewPage from "../review-page/review-page.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 
@@ -66,6 +67,7 @@ const App = (props) => {
       <Route path="/" exact render={() => <MainScreen {...mainProps} />} />
       <Route path="/login" render={() => <SignIn/>} />
       <Route path="/favorites" render={() => <Favorites {...favoritesProps} />} />
+      <Route path="/film/:id/review" render={() => <ReviewPage />} />
       <Route path="/film/:id" render={() => <MoviePage {...filmProps} />} />
     </Switch>
   );
@@ -76,7 +78,7 @@ App.propTypes = {
   films: PropTypes.array.isRequired,
   genres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
-  activeFilm: PropTypes.object.isRequired,
+  activeFilm: PropTypes.object,
   history: PropTypes.object,
   visibleFilms: PropTypes.arrayOf(
       PropTypes.shape({
