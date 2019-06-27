@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {compose} from "redux";
 import {withRouter} from "react-router";
-import {Route} from "react-router-dom";
+import {Route, Link} from "react-router-dom";
 import UserBlock from "../user-block/user-block.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 import Overview from "../overview/overview.jsx";
@@ -212,9 +212,9 @@ class MoviePage extends PureComponent {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">
+                <Link to={`${match.url}/review`} className="btn movie-card__button">
                   Add review
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -251,7 +251,8 @@ class MoviePage extends PureComponent {
               />
 
               <Route
-                path={match.url + `/Reviews`}
+                path={`${match.url}/reviews`}
+                exact
                 render={() => <Reviews activeFilmId={activeFilm.id}/>}
               />
             </div>

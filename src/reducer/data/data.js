@@ -8,7 +8,8 @@ const initialState = {
   loadedFilms: [],
   genres: [],
   visibleFilms: [],
-  activeFilm: {}
+  activeFilm: {},
+  favoriteFilms: []
 };
 
 const ActionType = {
@@ -21,6 +22,8 @@ const ActionType = {
   CLEAR_VISIBLE_FILMS: `CLEAR_VISIBLE_FILMS`,
   CHANGE_ACTIVE_FILM: `CHANGE_ACTIVE_FILM`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  ADD_FILM_TO_FAVORITE: `ADD_FILM_TO_FAVORITE`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`
 };
 
 const ActionCreator = {
@@ -69,6 +72,17 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_PROMO_FILM,
       payload: promoFilm
+    };
+  },
+  lLoadFavoriteFilms: (loadedFilms) => {
+    return {
+      type: ActionType.LOAD_FAVORITE_FILMS,
+      payload: loadedFilms
+    };
+  },
+  addFilmToFavorite: () => {
+    return {
+      type: ActionType.ADD_FILM_TO_FAVORITE
     };
   }
 };
@@ -132,9 +146,22 @@ const Operation = {
 
   addFilmToFavourite: (filmId, status) => (dispatch, _getState, api) => {
     return api
-      .post(`/favorite/${filmId}/${status}`, {
+      .post(`/favorite/${filmId ? 0 : 1}/${status}`, {
         film_id: filmId,
         status
+      })
+      .then(() => {
+        dispatch(ActionCreator.addFilmToFavorite());
+      })
+      .catch((error) => {
+        throw new Error(`Some trouble: ${error}`);
+      });
+  },
+  loadFavoriteFilms: () => (dispatch, _getState, api) => {
+    return api
+      .get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavoriteFilms(response.data));
       })
       .catch((error) => {
         throw new Error(`Some trouble: ${error}`);
@@ -243,6 +270,18 @@ const reducer = (state = initialState, action) => {
       const formedPromo = formFilms(action.payload)[0];
       return Object.assign({}, state, {
         promoFilm: formedPromo
+      });
+    case ActionType.LOAD_FAVORITE_FILMS:
+      return Object.assign({}, state, {
+        favoriteFilms: formFilms(action.payload)
+      });
+
+    case ActionType.ADD_FILM_TO_FAVORITE:
+      const updatedActiveFilm = Object.assign({}, state.activeFilm);
+      updatedActiveFilm.isFavorite = !updatedActiveFilm.isFavorite;
+
+      return Object.assign({}, state, {
+        activeFilm: updatedActiveFilm
       });
   }
   return state;
