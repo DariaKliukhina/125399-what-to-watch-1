@@ -10,17 +10,26 @@ import FilmsList from "../films-list/films-list.jsx";
 class Favorites extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
+  }
+
+  _handelHomeLinkClick(evt) {
+    evt.preventDefault();
+
+    const {onHomeRedirect} = this.props;
+
+    onHomeRedirect();
   }
 
   componentDidMount() {
-    const {getFavoriteFilms} = this.props;
+    const {onFavoriteFilmsLoad} = this.props;
 
-    getFavoriteFilms();
+    onFavoriteFilmsLoad();
   }
 
   render() {
     const {
-      homeRedirect: _handelHomeLinkClick,
       favoriteFilms,
       changeGenre,
       setActiveFilm
@@ -122,7 +131,7 @@ class Favorites extends PureComponent {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <a onClick={_handelHomeLinkClick} className="logo__link">
+            <a href="#" onClick={this._handelHomeLinkClick} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -146,10 +155,7 @@ class Favorites extends PureComponent {
 
         <footer className="page-footer">
           <div className="logo">
-            <a
-              onClick={_handelHomeLinkClick}
-              className="logo__link logo__link--light"
-            >
+            <a href="#" onClick={this._handelHomeLinkClick} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -167,8 +173,8 @@ class Favorites extends PureComponent {
 }
 
 Favorites.propTypes = {
-  homeRedirect: PropTypes.func.isRequired,
-  getFavoriteFilms: PropTypes.func.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
+  onFavoriteFilmsLoad: PropTypes.func.isRequired,
   favoriteFilms: PropTypes.array.isRequired,
   changeGenre: PropTypes.func.isRequired,
   setActiveFilm: PropTypes.func.isRequired,
@@ -178,7 +184,7 @@ const mapStateToProps = (state) => ({
   favoriteFilms: state.data.favoriteFilms
 });
 const mapDispatchToProps = (dispatch) => ({
-  getFavoriteFilms: () => {
+  onFavoriteFilmsLoad: () => {
     dispatch(Operation.loadFavoriteFilms());
   }
 });

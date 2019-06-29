@@ -51,14 +51,15 @@ const ActionCreator = {
       payload: loadedFilms
     };
   },
-  formVisibleFilms: () => {
+  formVisibleFilms: (filmId = null) => {
     return {
-      type: ActionType.FORM_VISIBLE_FILMS
+      type: ActionType.FORM_VISIBLE_FILMS,
+      payload: filmId
     };
   },
   clearVisibleFilms: (filmId = null) => {
     return {
-      type: ActionType.FORM_VISIBLE_FILMS,
+      type: ActionType.CLEAR_VISIBLE_FILMS,
       payload: filmId
     };
   },
@@ -287,4 +288,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator, reducer, Operation, formFilms, formGenres, ActionType};
+export {ActionCreator, reducer, Operation, formFilms, formGenres, ActionType, updateVisibleFilms};

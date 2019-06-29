@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import {Operation} from "../../reducer/user/user";
 import withErrors from "../hocs/with-errors/with-errors.jsx";
 import {withRouter} from "react-router";
@@ -14,13 +13,16 @@ class SignIn extends PureComponent {
     this._emailRef = React.createRef();
     this._passwordRef = React.createRef();
 
-    this.state = {
-      emailError: false,
-      passwordError: false
-    };
-
     this._handelFormSubmit = this._handelFormSubmit.bind(this);
     this._setMessage = this._setMessage.bind(this);
+    this._handelHomeLinkClick = this._handelHomeLinkClick.bind(this);
+  }
+
+  _handelHomeLinkClick(evt) {
+    evt.preventDefault();
+    const {onHomeRedirect} = this.props;
+
+    onHomeRedirect();
   }
 
   componentDidUpdate() {
@@ -138,11 +140,11 @@ class SignIn extends PureComponent {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <Link to="/" className="logo__link">
+            <a href="#" className="logo__link" onClick={this._handelHomeLinkClick}>
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </Link>
+            </a>
           </div>
 
           <h1 className="page-title user-page__title">Sign in</h1>
@@ -199,11 +201,11 @@ class SignIn extends PureComponent {
 
         <footer className="page-footer">
           <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
+            <a href="#" onClick={this._handelHomeLinkClick} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </Link>
+            </a>
           </div>
 
           <div className="copyright">
@@ -218,18 +220,18 @@ class SignIn extends PureComponent {
   _handelFormSubmit(evt) {
     evt.preventDefault();
     const {
-      changeAuthorizationStatus,
-      validateMail,
-      validatePassword
+      onChangeAuthorizationStatus,
+      onEmailValidate,
+      onPasswordValidate
     } = this.props;
-    const mailIsValid = validateMail(this._emailRef.current.value);
-    const passwordIsValid = validatePassword(this._passwordRef.current.value);
+    const mailIsValid = onEmailValidate(this._emailRef.current.value);
+    const passwordIsValid = onPasswordValidate(this._passwordRef.current.value);
     if (passwordIsValid && mailIsValid) {
       const userInfo = {
         email: this._emailRef.current.value,
         password: this._passwordRef.current.value
       };
-      changeAuthorizationStatus(userInfo, history);
+      onChangeAuthorizationStatus(userInfo, history);
     }
   }
 
@@ -258,13 +260,14 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  changeAuthorizationStatus: PropTypes.func.isRequired,
-  validateMail: PropTypes.func.isRequired,
-  validatePassword: PropTypes.func.isRequired,
+  onChangeAuthorizationStatus: PropTypes.func.isRequired,
+  onEmailValidate: PropTypes.func.isRequired,
+  onPasswordValidate: PropTypes.func.isRequired,
   emailError: PropTypes.bool.isRequired,
   passwordError: PropTypes.bool.isRequired,
   authorizationFailed: PropTypes.bool.isRequired,
   authorized: PropTypes.bool.isRequired,
+  onHomeRedirect: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
@@ -277,7 +280,7 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeAuthorizationStatus: (user, windowHistory) => {
+  onChangeAuthorizationStatus: (user, windowHistory) => {
     dispatch(Operation.authorizeUser(user, windowHistory));
   }
 });

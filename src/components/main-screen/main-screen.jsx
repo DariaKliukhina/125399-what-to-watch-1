@@ -1,13 +1,13 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from "react";
 import UserBlock from "../user-block/user-block.jsx";
 import withPlayer from "../hocs/with-player/with-player.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import GenreList from "../genre-list/genre-list.jsx";
 import FilmsList from "../films-list/films-list.jsx";
 
-class MainScreen extends PureComponent {
+class MainScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -25,16 +25,16 @@ class MainScreen extends PureComponent {
   }
 
   _handlePlayClick() {
-    const {togglePlayer} = this.props;
+    const {onPlayerToggle} = this.props;
 
-    togglePlayer();
+    onPlayerToggle();
   }
 
   _handelFavoriteClick() {
-    const {addFilmToFavorite, activeFilm, authorized, history} = this.props;
+    const {onAddFilmToFavorite, activeFilm, authorized, history} = this.props;
 
     if (authorized) {
-      addFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
+      onAddFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
     } else {
       history.push(`/login`);
     }
@@ -68,8 +68,8 @@ class MainScreen extends PureComponent {
       visibleFilms,
       genres,
       activeGenre,
-      changeGenre,
-      setActiveFilm,
+      onGenreChange,
+      onActiveFilmSet,
       activeFilm
     } = this.props;
 
@@ -121,8 +121,8 @@ class MainScreen extends PureComponent {
           <div
             className = "movie-card__bg" >
             <img
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              alt="The Grand Budapest Hotel" />
+              src={activeFilm.backgroundImage}
+              alt={activeFilm.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -188,12 +188,12 @@ class MainScreen extends PureComponent {
             <GenreList
               genres={genres}
               activeItem={activeGenre}
-              onGenreClick={changeGenre} />
+              onGenreClick={onGenreChange} />
 
             <FilmsList
               films={visibleFilms}
-              changeGenre={changeGenre}
-              setActiveFilm={setActiveFilm}
+              onGenreChange={onGenreChange}
+              onActiveFilmSet={onActiveFilmSet}
             />
 
             {this._displayShowMore()}
@@ -220,7 +220,7 @@ class MainScreen extends PureComponent {
 
 MainScreen.propTypes = {
   authorized: PropTypes.bool.isRequired,
-  addFilmToFavorite: PropTypes.func.isRequired,
+  onAddFilmToFavorite: PropTypes.func.isRequired,
   activeFilm: PropTypes.object,
   films: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -230,9 +230,9 @@ MainScreen.propTypes = {
     preview: PropTypes.string.isRequired
   })).isRequired,
   genres: PropTypes.array.isRequired,
-  changeGenre: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
   visibleFilms: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -246,9 +246,10 @@ MainScreen.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   activeGenre: PropTypes.string.isRequired,
-  togglePlayer: PropTypes.func.isRequired,
+  onPlayerToggle: PropTypes.func.isRequired,
 };
 
+export {MainScreen};
 export default compose(
     withRouter,
     withPlayer

@@ -5,7 +5,7 @@ import withActiveItem from "../hocs/with-active-item/with-active-item.jsx";
 const GenreList = (props) => {
   const {
     activeItem: activeGenre,
-    changeActiveItem: handelGenreClick,
+    onActiveItemChange: handelGenreClick,
     genres
   } = props;
 
@@ -37,7 +37,7 @@ const GenreList = (props) => {
 GenreList.propTypes = {
   genres: PropTypes.array.isRequired,
   activeItem: PropTypes.string.isRequired,
-  changeActiveItem: PropTypes.func.isRequired
+  onActiveItemChange: PropTypes.func.isRequired
 };
 
 export default withActiveItem(GenreList);

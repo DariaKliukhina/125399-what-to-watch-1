@@ -59,7 +59,23 @@ class Details extends PureComponent {
 }
 
 Details.propTypes = {
-  activeFilm: PropTypes.object.isRequired
+  activeFilm: PropTypes.shape({
+    description: PropTypes.string,
+    director: PropTypes.string,
+    genre: PropTypes.string,
+    id: PropTypes.number,
+    isFavorite: PropTypes.bool,
+    name: PropTypes.string,
+    poster: PropTypes.string,
+    posterImage: PropTypes.string,
+    preview: PropTypes.string,
+    rating: PropTypes.number,
+    released: PropTypes.number,
+    runTime: PropTypes.number,
+    scoresCount: PropTypes.number,
+    starring: PropTypes.arrayOf(PropTypes.string),
+    videoLink: PropTypes.string
+  }).isRequired
 };
 
 export default Details;
