@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
+
 import {ActionCreator, Operation} from "../../reducer/reviews/reviews";
+
 import UserBlock from "../user-block/user-block.jsx";
 import Rating from "../rating/rating.jsx";
 import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
@@ -53,6 +55,32 @@ class ReviewPage extends PureComponent {
     }
   }
 
+  _handelFormSubmit(evt) {
+    evt.preventDefault();
+
+    const {
+      onPostReview,
+      activeFilm,
+      activeItem: starsNumber,
+      onSubmitButtonStateChange,
+      onTextareaStateChange
+    } = this.props;
+
+    const rating = starsNumber ? starsNumber : 1;
+    const comment = this.message.current.value;
+
+    onSubmitButtonStateChange(true);
+    onTextareaStateChange(true);
+
+    onPostReview(activeFilm.id, {rating, comment});
+  }
+
+  _handelMessageInput(evt) {
+    const {onSubmitButtonStateChange} = this.props;
+
+    onSubmitButtonStateChange(this._checkMessageLength(evt.target.value));
+  }
+
   _handelHomeLinkClick(evt) {
     evt.preventDefault();
 
@@ -66,33 +94,6 @@ class ReviewPage extends PureComponent {
     const {history, match} = this.props;
 
     history.push(`/film/${match.params.id}`);
-  }
-
-  _handelFormSubmit(evt) {
-    evt.preventDefault();
-
-    const {
-      onPostReview,
-      activeFilm,
-      activeItem: starsNumber,
-      onSubmitButtonStateChange,
-      onTextareaStateChange
-    } = this.props;
-
-    const rating = starsNumber ? starsNumber : 1;
-
-    const comment = this.message.current.value;
-
-    onSubmitButtonStateChange(true);
-    onTextareaStateChange(true);
-
-    onPostReview(activeFilm.id, {rating, comment});
-  }
-
-  _handelMessageInput(evt) {
-    const {onSubmitButtonStateChange} = this.props;
-
-    onSubmitButtonStateChange(this._checkMessageLength(evt.target.value));
   }
 
   _checkMessageLength(message) {
@@ -211,14 +212,18 @@ class ReviewPage extends PureComponent {
       <section className="movie-card movie-card--full">
         <div className="movie-card__header">
           <div className="movie-card__bg">
-            <img src={activeFilm.backgroundImage} alt={activeFilm.name}/>
+            <img src={activeFilm.backgroundImage} alt={activeFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header">
             <div className="logo">
-              <a href="#" onClick={this._handelHomeLinkClick} className="logo__link">
+              <a
+                className="logo__link"
+                href="#"
+                onClick={this._handelHomeLinkClick}
+              >
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
@@ -228,9 +233,11 @@ class ReviewPage extends PureComponent {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="#"
+                  <a
+                    href="#"
                     className="breadcrumbs__link"
-                    onClick={this._handelMovieTitleClick}>
+                    onClick={this._handelMovieTitleClick}
+                  >
                     {activeFilm.name}
                   </a>
                 </li>
@@ -264,9 +271,15 @@ class ReviewPage extends PureComponent {
                 id="review-text"
                 placeholder="Review text"
                 onChange={this._handelMessageInput}
+                ref={this.message}
               />
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit" onClick={this._handelFormSubmit} disabled={submitButtonDisabled}>
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  onClick={this._handelFormSubmit}
+                  disabled={submitButtonDisabled}
+                >
                   Post
                 </button>
               </div>
@@ -279,9 +292,11 @@ class ReviewPage extends PureComponent {
   }
 }
 
-
 ReviewPage.propTypes = {
   onHomeRedirect: PropTypes.func.isRequired,
+  onSubmitButtonStateChange: PropTypes.func.isRequired,
+  onTextareaStateChange: PropTypes.func.isRequired,
+  submitButtonDisabled: PropTypes.bool.isRequired,
   onPrepareToPost: PropTypes.func.isRequired,
   onPostReview: PropTypes.func.isRequired,
   reviewPostedStatus: PropTypes.bool.isRequired,
@@ -289,11 +304,9 @@ ReviewPage.propTypes = {
   match: PropTypes.object.isRequired,
   activeFilm: PropTypes.object.isRequired,
   onActiveItemChange: PropTypes.func.isRequired,
-  activeItem: PropTypes.string.isRequired,
-  onSubmitButtonStateChange: PropTypes.func.isRequired,
-  onTextareaStateChange: PropTypes.func.isRequired,
-  submitButtonDisabled: PropTypes.bool.isRequired,
+  activeItem: PropTypes.string
 };
+
 const mapStateToProps = (state) => ({
   reviewPostedStatus: state.reviews.reviewPostedStatus
 });
@@ -307,6 +320,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {ReviewPage};
+
 export default compose(
     connect(
         mapStateToProps,

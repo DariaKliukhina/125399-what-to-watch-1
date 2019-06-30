@@ -2,14 +2,15 @@ import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Switch, Route} from "react-router-dom";
-import MainScreen from '../main-screen/main-screen.jsx';
-import {ActionCreator, Operation} from "../../reducer/data/data";
-import Favorites from "../favorites/favorites.jsx";
-import SignIn from "../sign-in/signIn.jsx";
-import MoviePage from "../movie-page/movie-page.jsx";
-import ReviewPage from "../review-page/review-page.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
+import {ActionCreator, Operation} from "../../reducer/data/data";
+
+import MainScreen from '../main-screen/main-screen.jsx';
+import SignIn from "../sign-in/signIn.jsx";
+import Favorites from "../favorites/favorites.jsx";
+import ReviewPage from "../review-page/review-page.jsx";
+import MoviePage from "../movie-page/movie-page.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -20,6 +21,7 @@ class App extends PureComponent {
 
   onHomeRedirect() {
     const {onActiveFilmSet, onGenreChange, history} = this.props;
+
     onActiveFilmSet();
     onGenreChange();
     history.push(`/`);
@@ -29,22 +31,22 @@ class App extends PureComponent {
     const {
       authorized,
       films,
+      visibleFilms,
       genres,
       activeGenre,
-      visibleFilms,
       onGenreChange,
       onShowMoreClick,
       activeFilm,
       onActiveFilmSet,
-      onAddFilmToFavorite,
+      onAddFilmToFavorite
     } = this.props;
 
     const mainProps = {
       authorized,
       films,
+      visibleFilms,
       genres,
       activeGenre,
-      visibleFilms,
       onGenreChange,
       onShowMoreClick,
       activeFilm,
@@ -61,11 +63,10 @@ class App extends PureComponent {
 
     const filmProps = {
       authorized,
+      visibleFilms,
       activeFilm,
-      activeGenre,
       onActiveFilmSet,
       onGenreChange,
-      visibleFilms,
       onHomeRedirect: this.onHomeRedirect,
       onAddFilmToFavorite
     };
@@ -73,7 +74,7 @@ class App extends PureComponent {
     const reviewProps = {
       authorized,
       activeFilm,
-      onHomeRedirect: this.onHomeRedirect,
+      onHomeRedirect: this.onHomeRedirect
     };
 
     return (
@@ -98,6 +99,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  history: PropTypes.object,
   authorized: PropTypes.bool.isRequired,
   films: PropTypes.arrayOf(
       PropTypes.shape({
@@ -138,7 +140,6 @@ App.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string),
     videoLink: PropTypes.string
   }).isRequired,
-  history: PropTypes.object,
   visibleFilms: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -148,7 +149,6 @@ App.propTypes = {
         preview: PropTypes.string.isRequired
       })
   ).isRequired,
-
   onGenreChange: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
   onActiveFilmSet: PropTypes.func.isRequired,
@@ -189,6 +189,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.addFilmToFavourite(filmId, filmStatus));
   }
 });
+
 
 export {App};
 

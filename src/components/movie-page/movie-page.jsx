@@ -39,7 +39,7 @@ class MoviePage extends PureComponent {
     const {onAddFilmToFavorite, activeFilm, authorized, history} = this.props;
 
     if (authorized) {
-      onAddFilmToFavorite(activeFilm.id, activeFilm.favorite ? 0 : 1);
+      onAddFilmToFavorite(activeFilm.id, activeFilm.isFavorite);
     } else {
       history.push(`/login`);
     }
@@ -204,6 +204,7 @@ class MoviePage extends PureComponent {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
+                  onClick={this._handlePlayClick}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s" />

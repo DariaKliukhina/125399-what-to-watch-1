@@ -147,7 +147,7 @@ const Operation = {
 
   addFilmToFavourite: (filmId, status) => (dispatch, _getState, api) => {
     return api
-      .post(`/favorite/${filmId ? 0 : 1}/${status}`, {
+      .post(`/favorite/${filmId}/${status ? 0 : 1}`, {
         film_id: filmId,
         status
       })
@@ -155,9 +155,10 @@ const Operation = {
         dispatch(ActionCreator.addFilmToFavorite());
       })
       .catch((error) => {
-        throw new Error(`Some trouble: ${error}`);
+        throw new Error(`Can't add film to favorite: ${error}`);
       });
   },
+
   loadFavoriteFilms: () => (dispatch, _getState, api) => {
     return api
       .get(`/favorite`)
@@ -165,7 +166,7 @@ const Operation = {
         dispatch(ActionCreator.loadFavoriteFilms(response.data));
       })
       .catch((error) => {
-        throw new Error(`Some trouble: ${error}`);
+        throw new Error(`Can't load favorites films: ${error}`);
       });
   },
 };

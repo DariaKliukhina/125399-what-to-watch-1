@@ -1,12 +1,12 @@
+const initialState = {
+  reviews: [],
+  reviewPostedStatus: false
+};
+
 const ActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   CLEAR_REVIEWS: `CLEAR_REVIEWS`,
   POST_REVIEW: `POST_REVIEW`
-};
-
-const initialState = {
-  reviews: [],
-  reviewPostedStatus: false
 };
 
 const ActionCreator = {
@@ -31,7 +31,6 @@ const ActionCreator = {
   }
 };
 
-
 const Operation = {
   loadReviews: (filmId) => (dispatch, _getState, api) => {
     return api.get(`/comments/${filmId}`).then((response) => {
@@ -44,11 +43,11 @@ const Operation = {
       .then(() => {
         dispatch(ActionCreator.postReview(true));
       })
-      .catch((error) => {
+      .catch(() => {
         dispatch(ActionCreator.postReview(false));
-        throw new Error(`Some trouble: ${error}`);
       });
   }
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -62,6 +61,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.CLEAR_REVIEWS:
       return Object.assign({}, state, initialState);
+
     case ActionType.POST_REVIEW:
       return Object.assign({}, state, {
         reviewPostedStatus: action.payload
@@ -71,4 +71,9 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator, Operation, reducer, ActionType};
+export {
+  ActionType,
+  ActionCreator,
+  Operation,
+  reducer
+};

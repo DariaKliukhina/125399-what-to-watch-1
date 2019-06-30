@@ -29,7 +29,7 @@ const withFilmDuration = (WrappedComponent) => {
         <WrappedComponent
           {...this.props}
           filmDuration={filmDuration}
-          updateFilmDuration={this.onFilmDurationUpdate}
+          onFilmDurationUpdate={this.onFilmDurationUpdate}
         />
       );
     }

@@ -31,8 +31,8 @@ class Favorites extends PureComponent {
   render() {
     const {
       favoriteFilms,
-      changeGenre,
-      setActiveFilm
+      onGenreChange,
+      onActiveFilmSet
     } = this.props;
 
     return (
@@ -148,8 +148,8 @@ class Favorites extends PureComponent {
 
           <FilmsList
             films={favoriteFilms}
-            changeGenre={changeGenre}
-            setActiveFilm={setActiveFilm}
+            onGenreChange={onGenreChange}
+            onActiveFilmSet={onActiveFilmSet}
           />
         </section>
 
@@ -176,8 +176,8 @@ Favorites.propTypes = {
   onHomeRedirect: PropTypes.func.isRequired,
   onFavoriteFilmsLoad: PropTypes.func.isRequired,
   favoriteFilms: PropTypes.array.isRequired,
-  changeGenre: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired,
+  onGenreChange: PropTypes.func.isRequired,
+  onActiveFilmSet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
