@@ -4,6 +4,8 @@ import {withRouter} from "react-router";
 import {compose} from "redux";
 import VideoPlayer from '../video-player/video-player.jsx';
 
+const TIMEOUT = 1000;
+
 const SIZES = {
   width: 280,
   height: 175
@@ -70,7 +72,7 @@ class MovieCard extends PureComponent {
         function () {
           this._videoRef.current.video.current.play();
         }.bind(this),
-        1000
+        TIMEOUT
     );
   }
 
