@@ -143,7 +143,7 @@ describe(`Reducer works correctly`, () => {
     apiMock.onPost(`/login`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenCalledTimes(3);
     });
   });
 });
