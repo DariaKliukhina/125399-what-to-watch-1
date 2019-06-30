@@ -13,14 +13,14 @@ describe(`withErrors hoc:`, () => {
   it(`Should change emailError state after it validation to true if given wrong email`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().validateMail(`notemail`);
+    wrapper.instance().onEmailValidate(`notemail`);
     expect(wrapper.state().emailError).toEqual(true);
   });
 
   it(`Should change passwordError state after it validation to true if no password provided`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().validatePassword();
+    wrapper.instance().onPasswordValidate();
     expect(wrapper.state().passwordError).toEqual(true);
   });
 });

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The application is displayed correctly. VideoPlayer correctly renders after launch 1`] = `
+exports[`VideoPlayer: Correctly renders after relaunch 1`] = `
 <video
-  height={100}
+  height={300}
   loop={true}
   muted={true}
-  poster="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-  src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
-  width={100}
+  poster="poster"
+  src="preview"
+  width={300}
 />
 `;

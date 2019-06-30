@@ -131,7 +131,8 @@ Array [
       >
         <a
           className="logo__link"
-          href="main.html"
+          href="#"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -158,16 +159,13 @@ Array [
       <div
         className="user-block"
       >
-        <div
-          className="user-block__avatar"
+        <a
+          className="user-block__link"
+          href="/login"
+          onClick={[Function]}
         >
-          <img
-            alt="User"
-            height="63"
-            src="avatar"
-            width="63"
-          />
-        </div>
+          Sign in
+        </a>
       </div>
     </header>
     <section
@@ -183,21 +181,20 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="string"
+              src="string"
+              width={280}
             />
           </div>
           <h3
@@ -205,29 +202,34 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="#"
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 1,
+                }
+              }
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              Title
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="img/bohemian-rhapsody.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="string"
+              src="string"
+              width={280}
             />
           </div>
           <h3
@@ -235,29 +237,34 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="#"
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 2,
+                }
+              }
             >
-              Bohemian Rhapsody
+              Title2
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
           <div
             className="small-movie-card__image"
           >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="img/macbeth.jpg"
-              width="280"
+            <video
+              height={175}
+              loop={true}
+              muted={true}
+              poster="string"
+              src="string"
+              width={280}
             />
           </div>
           <h3
@@ -265,189 +272,15 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="#"
+              onClick={[Function]}
+              params={
+                Object {
+                  "id": 3,
+                }
+              }
             >
-              Macbeth
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Aviator"
-              height="175"
-              src="img/aviator.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Aviator
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="We need to talk about Kevin"
-              height="175"
-              src="img/we-need-to-talk-about-kevin.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              We need to talk about Kevin
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="What We Do in the Shadows"
-              height="175"
-              src="img/what-we-do-in-the-shadows.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              What We Do in the Shadows
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Revenant"
-              height="175"
-              src="img/revenant.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Revenant
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Johnny English"
-              height="175"
-              src="img/johnny-english.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Johnny English
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <button
-            className="small-movie-card__play-btn"
-            type="button"
-          >
-            Play
-          </button>
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Shutter Island"
-              height="175"
-              src="img/shutter-island.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Shutter Island
+              Title3
             </a>
           </h3>
         </article>
@@ -461,7 +294,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="#"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

@@ -1,37 +1,25 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from './movie-card.jsx';
-import {BrowserRouter} from "react-router-dom";
 
-const mock = {
-  film: {
-    genre: `Dramas`,
-    title: `Macbeth`,
-    poster: `picture.jpg`,
-    preview: `video.mp4`,
-    id: 1
-  },
-  mouseHandler: jest.fn()
+import {MovieCard} from './movie-card.jsx';
+
+const mocks = {
+  id: 1,
+  title: `title`,
+  poster: `poster`,
+  preview: `prev`,
+  genre: `Action`,
+  onGenreChange: jest.fn(),
+  onActiveFilmSet: jest.fn(),
+  history: {
+    push: jest.fn()
+  }
 };
 
+describe(`MovieCard:`, () => {
+  it(`Correctly renders after relaunch`, () => {
+    const tree = renderer.create(<MovieCard {...mocks} />).toJSON();
 
-it(`MovieCard renders correctly`, () => {
-  const {film} = mock;
-
-  const tree = renderer
-    .create(
-        <BrowserRouter>
-          <MovieCard
-            id={film.id}
-            title={film.title}
-            genre={film.genre}
-            poster={film.poster}
-            preview={film.preview}
-            onSmallCardEnter={film.mouseHandler}
-          />
-        </BrowserRouter>)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
 });
-

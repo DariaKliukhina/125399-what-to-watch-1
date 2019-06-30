@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignIn: Correctly renders after relaunch 1`] = `
+exports[`Player: Correctly renders after relaunch 1`] = `
 Array [
   <div
     className="visually-hidden"
@@ -121,136 +121,91 @@ Array [
     </svg>
   </div>,
   <div
-    className="user-page"
+    className="player"
   >
-    <header
-      className="page-header user-page__head"
+    <video
+      className="player__video"
+      poster="string"
+      src="link"
+    />
+    <button
+      className="player__exit"
+      onClick={[Function]}
+      type="button"
     >
-      <div
-        className="logo"
-      >
-        <a
-          className="logo__link"
-          href="#"
-          onClick={[Function]}
-        >
-          <span
-            className="logo__letter logo__letter--1"
-          >
-            W
-          </span>
-          <span
-            className="logo__letter logo__letter--2"
-          >
-            T
-          </span>
-          <span
-            className="logo__letter logo__letter--3"
-          >
-            W
-          </span>
-        </a>
-      </div>
-      <h1
-        className="page-title user-page__title"
-      >
-        Sign in
-      </h1>
-    </header>
+      Exit
+    </button>
     <div
-      className="sign-in user-page__content"
-    >
-      <form
-        action="#"
-        className="sign-in__form"
-      >
-        <div
-          className="sign-in__fields"
-        >
-          <div
-            className="sign-in__field"
-          >
-            <input
-              className="sign-in__input"
-              id="user-email"
-              name="user-email"
-              placeholder="Email address"
-              type="email"
-            />
-            <label
-              className="sign-in__label visually-hidden"
-              htmlFor="user-email"
-            >
-              Email address
-            </label>
-          </div>
-          <div
-            className="sign-in__field"
-          >
-            <input
-              className="sign-in__input"
-              id="user-password"
-              name="user-password"
-              placeholder="Password"
-              type="password"
-            />
-            <label
-              className="sign-in__label visually-hidden"
-              htmlFor="user-password"
-            >
-              Password
-            </label>
-          </div>
-        </div>
-        <div
-          className="sign-in__submit"
-        >
-          <button
-            className="sign-in__btn"
-            onClick={[Function]}
-            type="submit"
-          >
-            Sign in
-          </button>
-        </div>
-      </form>
-    </div>
-    <footer
-      className="page-footer"
+      className="player__controls"
     >
       <div
-        className="logo"
+        className="player__controls-row"
       >
-        <a
-          className="logo__link logo__link--light"
-          href="#"
+        <div
+          className="player__time"
+        >
+          <progress
+            className="player__progress"
+            max="100"
+          />
+          <div
+            className="player__toggler"
+          >
+            Toggler
+          </div>
+        </div>
+        <div
+          className="player__time-value"
+        >
+          0 : 0 : 0
+        </div>
+      </div>
+      <div
+        className="player__controls-row"
+      >
+        <button
+          className="player__play"
           onClick={[Function]}
+          type="button"
         >
-          <span
-            className="logo__letter logo__letter--1"
+          <svg
+            height="19"
+            viewBox="0 0 19 19"
+            width="19"
           >
-            W
+            <use
+              xlinkHref="#play-s"
+            />
+          </svg>
+          <span>
+            Play
           </span>
-          <span
-            className="logo__letter logo__letter--2"
+        </button>
+        <div
+          className="player__name"
+        >
+          Title
+        </div>
+        <button
+          className="player__full-screen"
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            height="27"
+            viewBox="0 0 27 27"
+            width="27"
           >
-            T
+            <use
+              xlinkHref="#full-screen"
+            />
+          </svg>
+          <span>
+            Full screen
           </span>
-          <span
-            className="logo__letter logo__letter--3"
-          >
-            W
-          </span>
-        </a>
+        </button>
       </div>
-      <div
-        className="copyright"
-      >
-        <p>
-          © 2019 What to watch Ltd.
-        </p>
-      </div>
-    </footer>
+    </div>
   </div>,
 ]
 `;

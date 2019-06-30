@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MovieCard renders correctly 1`] = `
+exports[`MovieCard: Correctly renders after relaunch 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
@@ -13,8 +14,8 @@ exports[`MovieCard renders correctly 1`] = `
       height={175}
       loop={true}
       muted={true}
-      poster="picture.jpg"
-      src="video.mp4"
+      poster="poster"
+      src="prev"
       width={280}
     />
   </div>
@@ -23,6 +24,7 @@ exports[`MovieCard renders correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
+      href="#"
       onClick={[Function]}
       params={
         Object {
@@ -30,7 +32,7 @@ exports[`MovieCard renders correctly 1`] = `
         }
       }
     >
-      Macbeth
+      title
     </a>
   </h3>
 </article>

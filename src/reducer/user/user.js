@@ -26,7 +26,7 @@ const ActionCreator = {
     payload: status
   }),
 
-   setUserInfo: (currentUser) => ({
+  setUserInfo: (currentUser) => ({
     type: ActionType.SET_USER_INFO,
     payload: currentUser
   })

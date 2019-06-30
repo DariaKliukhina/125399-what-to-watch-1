@@ -1,10 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
 import {
-  actionChangeAuthorizationProcessStatus,
-  actionChangeAuthorizationStatus,
-  actionSetUserInfo,
   ActionType,
+  ActionCreator,
   Operation,
   reducer
 } from "./user.js";
@@ -20,42 +18,42 @@ const mocks = {
 
 describe(`Action creators work correctly`, () => {
   it(`Action creator for changing authorization status return correct action`, () => {
-    expect(actionChangeAuthorizationStatus(false)).toEqual({
+    expect(ActionCreator.changeAuthorizationStatus(false)).toEqual({
       type: ActionType.CHANGE_AUTHORIZATION_STATUS,
       payload: false
     });
   });
 
   it(`Action creator for changing authorization status return correct payload`, () => {
-    expect(actionChangeAuthorizationStatus(true)).toEqual({
+    expect(ActionCreator.changeAuthorizationStatus(true)).toEqual({
       type: ActionType.CHANGE_AUTHORIZATION_STATUS,
       payload: true
     });
   });
 
   it(`Action creator for changing authorization process status return correct action`, () => {
-    expect(actionChangeAuthorizationProcessStatus(false)).toEqual({
+    expect(ActionCreator.changeAuthorizationProcessStatus(false)).toEqual({
       type: ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS,
       payload: false
     });
   });
 
   it(`Action creator for changing authorization process status return correct payload`, () => {
-    expect(actionChangeAuthorizationProcessStatus(true)).toEqual({
+    expect(ActionCreator.changeAuthorizationProcessStatus(true)).toEqual({
       type: ActionType.CHANGE_AUTHORIZATION_PROCESS_STATUS,
       payload: true
     });
   });
 
   it(`Action creator for loading user info returns correct action`, () => {
-    expect(actionSetUserInfo({})).toEqual({
+    expect(ActionCreator.setUserInfo({})).toEqual({
       type: ActionType.SET_USER_INFO,
       payload: {}
     });
   });
 
   it(`Action creator for loading user info returns payload with user info`, () => {
-    expect(actionSetUserInfo(mocks.loadedUser)).toEqual({
+    expect(ActionCreator.setUserInfo(mocks.loadedUser)).toEqual({
       type: ActionType.SET_USER_INFO,
       payload: mocks.loadedUser
     });
@@ -145,7 +143,7 @@ describe(`Reducer works correctly`, () => {
     apiMock.onPost(`/login`).reply(200, [{fake: true}]);
 
     return filmsLoader(dispatch, jest.fn(), api).then(() => {
-      expect(dispatch).toHaveBeenCalledTimes(3);
+      expect(dispatch).toHaveBeenCalledTimes(2);
     });
   });
 });

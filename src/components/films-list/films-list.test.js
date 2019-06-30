@@ -1,77 +1,80 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import FilmsList from './films-list.jsx';
 import {BrowserRouter} from "react-router-dom";
 
+import FilmsList from './films-list.jsx';
+
 const mocks = {
+  onGenreChange: jest.fn(),
+  onActiveFilmSet: jest.fn(),
   films: [
     {
+      backgroundImage: `image`,
+      description: `description`,
+      director: `Director`,
+      genre: `Action`,
       id: 1,
-      genre: `Kids & Family`,
-      name: `Fantastic Beasts: The Crimes of Grindelwald`,
-      poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+      isFavorite: false,
+      name: `Title`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 5,
+      released: 2018,
+      runTime: 88,
+      scoresCount: 2000,
+      starring: [`1`, `2`, `3`],
+      videoLink: `link`
     },
     {
-      id: 1,
-      genre: `Dramas`,
-      name: `Bohemian Rhapsody`,
-      poster: `bohemian-rhapsody.jpg`,
-      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
+      backgroundImage: `image`,
+      description: `description2`,
+      director: `Director2`,
+      genre: `Drama`,
+      id: 2,
+      isFavorite: true,
+      name: `Title2`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 5,
+      released: 2019,
+      runTime: 12345,
+      scoresCount: 2000,
+      starring: [`2`, `3`, `4`],
+      videoLink: `link`
     },
     {
-      id: 1,
-      genre: `Dramas`,
-      name: `Macbeth`,
-      poster: `macbeth.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    },
-    {
-      id: 1,
-      genre: `Crime`,
-      name: `Aviator`,
-      poster: `aviator.jpg`,
-      preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
-    },
-    {
-      id: 1,
-      genre: `Sci-Fi`,
-      name: `We need to talk about Kevin`,
-      poster: `we-need-to-talk-about-kevin.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    },
-    {
-      id: 1,
-      genre: `Crime`,
-      name: `What We Do in the Shadows`,
-      poster: `what-we-do-in-the-shadows.jpg`,
-      preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-    },
-  ],
-  genres: [
-    `All genres`,
-    `Comedies`,
-    `Crime`,
-    `Documentary`,
-    `Dramas`,
-    `Horror`,
-    `Kids & Family`,
-    `Romance`,
-    `Sci-Fi`,
-    `Thrillers`
+      backgroundImage: `image`,
+      description: `description3`,
+      director: `Director3`,
+      genre: `Comedy`,
+      id: 3,
+      isFavorite: false,
+      name: `Title3`,
+      poster: `string`,
+      posterImage: `string`,
+      preview: `string`,
+      rating: 10,
+      released: 1998,
+      runTime: 123,
+      scoresCount: 1,
+      starring: [`4`, `9`, `10`],
+      videoLink: `link`
+    }
   ]
 };
 
-it(`FilmsList screen renders correctly`, () => {
+describe(`MoviesList:`, () => {
+  it(`Correctly renders after relaunch`, () => {
+    const tree = renderer
+      .create(
+          <BrowserRouter>
+            <FilmsList {...mocks} />
+          </BrowserRouter>
+      )
+      .toJSON();
 
-
-  const component = renderer.create(
-      <BrowserRouter>
-        <FilmsList
-          films={mocks.films}/>
-      </BrowserRouter>
-  ).toJSON();
-
-  expect(component).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
 });
-

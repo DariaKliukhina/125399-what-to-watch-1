@@ -1,24 +1,28 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import reducer from "../../reducer/index";
 import {createStore} from "redux";
-import {BrowserRouter} from "react-router-dom";
 
-import {App} from './app.jsx';
+import {MainScreen} from "./main-screen";
 
+Enzyme.configure({adapter: new Adapter()});
 
 const mocks = {
-  authorized: false,
+  authorized: true,
   activeGenre: `All genres`,
-  onAddFilmToFavorite: jest.fn(),
   onGenreChange: jest.fn(),
   onShowMoreClick: jest.fn(),
   onActiveFilmSet: jest.fn(),
+  onPlayerToggle: jest.fn(),
+  onAddFilmToFavorite: jest.fn(),
   history: {
     push: jest.fn()
   },
   activeFilm: {
+    backgroundImage: `image`,
     description: `description`,
     director: `Director`,
     genre: `Action`,
@@ -150,25 +154,46 @@ const mocks = {
   ]
 };
 
-describe(`App:`, () => {
+describe(`Main:`, () => {
   const store = createStore(reducer);
 
-  it(`Correctly renders after relaunch`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <BrowserRouter>
-              <App {...mocks} />
-            </BrowserRouter>
-          </Provider>,
-          {
-            createNodeMock: () => {
-              return {};
-            }
-          }
-      )
-      .toJSON();
+  it(`Should run callback onAddFilmToFavorite on add to favorite button click`, () => {
+    const main = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <MainScreen {...mocks} />
+          </BrowserRouter>
+        </Provider>
+    );
 
-    expect(tree).toMatchSnapshot();
+    const addToFavoriteButton = main.find(`.btn--list`);
+    addToFavoriteButton.simulate(`click`, {preventDefault() {}});
+    expect(mocks.onAddFilmToFavorite).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Should run callback onPlayerToggle on add to play button click`, () => {
+    const main = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <MainScreen {...mocks} />
+          </BrowserRouter>
+        </Provider>
+    );
+
+    const playButton = main.find(`.btn--play`);
+    playButton.simulate(`click`, {preventDefault() {}});
+    expect(mocks.onPlayerToggle).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Shouldn't display showmore button if all films are shown`, () => {
+    const main = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <MainScreen {...mocks} />
+          </BrowserRouter>
+        </Provider>
+    );
+
+    expect(main.exists(`.catalog__more`)).toEqual(false);
   });
 });

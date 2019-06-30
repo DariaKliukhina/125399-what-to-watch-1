@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GenreList screen renders correctly 1`] = `
+exports[`GenresList: Correctly renders after relaunch 1`] = `
 <ul
   className="catalog__genres-list"
 >
   <li
-    className="catalog__genres-item catalog__genres-item--active"
+    className="catalog__genres-item "
   >
     <a
       className="catalog__genres-link"
@@ -23,7 +23,7 @@ exports[`GenreList screen renders correctly 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Comedies
+      Action
     </a>
   </li>
   <li
@@ -34,7 +34,7 @@ exports[`GenreList screen renders correctly 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Crime
+      Drama
     </a>
   </li>
   <li
@@ -45,73 +45,7 @@ exports[`GenreList screen renders correctly 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Documentary
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Dramas
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Horror
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Kids & Family
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Romance
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Sci-Fi
-    </a>
-  </li>
-  <li
-    className="catalog__genres-item "
-  >
-    <a
-      className="catalog__genres-link"
-      href="#"
-      onClick={[Function]}
-    >
-      Thrillers
+      Comedy
     </a>
   </li>
 </ul>

@@ -11,10 +11,10 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withActiveItem(MockComponent);
 
 describe(`withActiveItem hoc:`, () => {
-  it(`Should change withActiveItem state when call changeActiveItem to given value`, () => {
+  it(`Should change withActiveItem state when call onActiveItemChange to given value`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
-    wrapper.instance().changeActiveItem(3);
+    wrapper.instance().onActiveItemChange(3);
     expect(wrapper.state().activeItem).toEqual(3);
   });
 });
