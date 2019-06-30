@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import withFilmDuration from "../hocs/with-film-duration/with-film-duration.jsx";
+import withFilmDuration from "../../hocs/with-film-duration/with-film-duration.jsx";
 
 class Player extends PureComponent {
   constructor(props) {

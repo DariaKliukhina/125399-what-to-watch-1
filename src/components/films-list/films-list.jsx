@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withActiveItem from "../hocs/with-active-item/with-active-item.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import MovieCard from '../movie-card/movie-card.jsx';
 
 const FilmsList = (props) => {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import UserBlock from "../user-block/user-block.jsx";
-import withPrivatePath from "../hocs/with-private-path/with-private-path.jsx";
+import withPrivatePath from "../../hocs/with-private-path/with-private-path.jsx";
 import {Operation} from "../../reducer/data/data";
 import FilmsList from "../films-list/films-list.jsx";
 

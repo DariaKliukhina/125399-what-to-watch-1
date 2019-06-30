@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 
-import Player from "../../player/player.jsx";
+import Player from "../../components/player/player.jsx";
 
 const withPlayer = (WrappedComponent) => {
   class WithPlayer extends PureComponent {

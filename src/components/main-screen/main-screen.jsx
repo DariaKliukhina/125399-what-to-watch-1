@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import UserBlock from "../user-block/user-block.jsx";
-import withPlayer from "../hocs/with-player/with-player.jsx";
+import withPlayer from "../../hocs/with-player/with-player.jsx";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 import PropTypes from "prop-types";
